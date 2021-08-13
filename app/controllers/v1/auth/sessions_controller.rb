@@ -1,2 +1,6 @@
-class V1::Auth::SessionsController < DeviseTokenAuth::SessionsController
+module V1
+  module Auth
+    class SessionsController < DeviseTokenAuth::SessionsController
+    end
+  end
 end
