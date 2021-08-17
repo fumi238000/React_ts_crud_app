@@ -13,6 +13,7 @@ AllCops:
     - "node_modules/**/*"
     - "tmp/**/*"
     - "vendor/**/*"
+    - "db/seeds.rb"
 
 # 日本語のコメントを許可
 Style/AsciiComments:
