@@ -1,34 +1,33 @@
-user_params = [
-  {
-    email: "example@example.com",
-    password: "password"
-  }
-]
+# User
+User.find_or_create_by!(email: "example@example.com") do |u|
+  u.email = "example@example.com"
+  u.password = "password"
+  puts "Userの初期データ導入完了"
+end
 
-User.delete_all
-User.create!(user_params)
-Rails.logger.debug "ユーザーの初期データの投入に成功しました!"
-
+# POST
 post_params = [
   {
-    user_id: 1,
     title: "React",
-    details: "詳細はこちらになります"
+    details: "ユーザインターフェース構築のための JavaScript ライブラリ"
   },
   {
-    user_id: 1,
     title: "Vue.js",
-    details: "詳細はこちらになります"
+    details: "The Progressive JavaScript Framework"
   },
   {
-    user_id: 1,
     title: "Angular",
-    details: "詳細はこちらになります"
+    details: "モバイルとデスクトップ，ひとつのフレームワーク"
   }
 ]
 
-Post.delete_all
-Post.create!(post_params)
-Rails.logger.debug "Postの初期データの投入に成功しました!"
+post_params.each do |post|
+  Post.find_or_create_by!(title: post[:title]) do |p|
+    p.title = post[:title]
+    p.details = post[:details]
+    p.user_id = User.first.id
+  end
+end
+puts "postの初期データ導入完了"
 
-Rails.logger.debug "すべての初期データ投入に成功しました!"
+puts "全てのデータ導入完了"
