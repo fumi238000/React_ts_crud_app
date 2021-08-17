@@ -7,7 +7,7 @@ user_params = [
 
 User.delete_all
 User.create!(user_params)
-puts "ユーザーの初期データの投入に成功しました!"
+Rails.logger.debug "ユーザーの初期データの投入に成功しました!"
 
 post_params = [
   {
@@ -29,6 +29,6 @@ post_params = [
 
 Post.delete_all
 Post.create!(post_params)
-puts "Postの初期データの投入に成功しました!"
+Rails.logger.debug "Postの初期データの投入に成功しました!"
 
-puts "すべての初期データ投入に成功しました!"
+Rails.logger.debug "すべての初期データ投入に成功しました!"

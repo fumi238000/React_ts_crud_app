@@ -1,2 +1,4 @@
-class V1::PostsController < ApplicationController
+module V1
+  class PostsController < ApplicationController
+  end
 end
