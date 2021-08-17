@@ -3,7 +3,7 @@ require:
   - rubocop-performance
 
 AllCops:
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 2.6
   NewCops: enable # rubocopの新機能をactiveにする
   Exclude:
     - "assets/**/*"
@@ -40,3 +40,9 @@ Style/WordArray:
 
 Style/SymbolArray:
   Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 20
