@@ -1,5 +1,4 @@
-import React from 'react';
-import PostIndex from './apis/PostIndex';
+import { PostIndex } from './apis/PostIndex';
 import './App.css';
 
 function App() {
