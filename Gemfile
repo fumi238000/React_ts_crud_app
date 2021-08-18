@@ -9,6 +9,7 @@ gem "devise"
 gem "devise_token_auth"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
+gem "rack-cors"
 gem "rails", "~> 6.1.4"
 gem "rails-i18n"
 

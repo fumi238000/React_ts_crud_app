@@ -9,11 +9,11 @@ end
 post_params = [
   {
     title: "React",
-    details: "ユーザインターフェース構築のための JavaScript ライブラリ"
+    details: "JavaScript ライブラリ"
   },
   {
     title: "Vue.js",
-    details: "The Progressive JavaScript Framework"
+    details: "JavaScript Framework"
   },
   {
     title: "Angular",
