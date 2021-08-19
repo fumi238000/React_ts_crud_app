@@ -31,4 +31,37 @@ RSpec.describe "V1::Posts", type: :request do
       end
     end
   end
+
+  describe "POST #create" do
+    before { create(:user) }
+    subject { post(v1_posts_path, params: post_params) }
+    let(:post_params) { { post: attributes_for(:post) } }
+
+    # TODO: ログイン機能実装後に実装
+    # context 'トークン認証情報がない場合' do
+    #   subject { post(v1_posts_path, params: post_params) }
+    #   it 'エラーする' do
+    #     subject
+    #     expect(response).to have_http_status(:unauthorized)
+    #   end
+    # end
+
+    context "パラメータが正常なとき" do
+      it "データが保存されること" do
+        expect { subject }.to change { Post.count }.by(1)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "パラメータが異常なとき" do
+      let(:post_params) { { post: attributes_for(:post, :invalid, user_id: 1) } }
+      it "データが保存されないこと" do
+        expect { subject }.not_to change { Post.count }.by(0)
+        expect(response).to have_http_status(:unprocessable_entity)
+        json = JSON.parse(response.body)
+        expect(json["title"]).to include "を入力してください"
+        expect(json["details"]).to include "を入力してください"
+      end
+    end
+  end
 end
