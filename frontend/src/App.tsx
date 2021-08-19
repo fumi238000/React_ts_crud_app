@@ -1,4 +1,5 @@
 import { PostIndex } from './apis/PostIndex';
+import { PostCreatePage } from './components/pages/post/PostCreatePage';
 import './App.css';
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
       <h1>TODOアプリ</h1>
       <PostIndex/>
+      <PostCreatePage/>
     </>
   );
 }
