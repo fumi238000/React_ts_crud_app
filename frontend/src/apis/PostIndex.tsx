@@ -1,3 +1,6 @@
+// TODO: apiの情報を取得することに特化させる
+
+
 import React, { useState, useEffect} from 'react';
 import axios from 'axios'
 

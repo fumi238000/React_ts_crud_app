@@ -1,6 +1,6 @@
+import { memo, VFC } from "react";
 
-//Postの新規作成画面
-export const PostCreatePage = () => {
+export const PostCreatePage: VFC = memo(() => {
   return (
     <>
       <button>戻る</button>
@@ -8,5 +8,5 @@ export const PostCreatePage = () => {
       <input placeholder="TODOを入力する" />
       <button>新規作成</button>
     </>
-  );
-};
+  )
+});
