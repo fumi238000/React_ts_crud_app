@@ -7,10 +7,11 @@ import { TodoType } from '../../../types/api/post';
 
 export const PostIndexPage: VFC = () => {
   const history = useHistory();
-  const onClickPostEditPage = useCallback(() => history.push("/post/edit"), []);
-  const onClickPostCreatePage = useCallback(() => history.push("/post/new"), []);
+  const onClickPostEditPage = useCallback(() => history.push("/post/edit"),[history]);
+  const onClickPostCreatePage = useCallback(() => history.push("/post/new"),[history]);
 
   const [posts, setPosts] = useState<Array<TodoType>>([])
+
   useEffect(() => {
     axios.get<Array<TodoType>>(postsIndexUrl)
     .then(res => {

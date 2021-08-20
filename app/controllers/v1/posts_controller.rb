@@ -1,7 +1,7 @@
 module V1
   class PostsController < ApplicationController
     def index
-      posts = Post.order(id: :asc)
+      posts = Post.order(id: :desc)
       render json: posts
     end
 
@@ -20,7 +20,7 @@ module V1
 
     def post_params
       # TODO: ログインユーザーの値を参照するように修正
-      params.require(:post).permit(:title, :details).merge(user_id: User.first.id)
+      params.require(:post).permit(:title, :details, :user_id)
     end
   end
 end

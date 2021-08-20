@@ -1,5 +1,5 @@
 import { memo, VFC } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export const PostEditPage: VFC = memo(() => {
   const history = useHistory();
