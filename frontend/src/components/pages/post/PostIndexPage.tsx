@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import { postsIndexUrl } from '../../../urls';
 import { TodoType } from '../../../types/api/post';
+import { PostDelete } from '../../../hooks/usePostDelete';
 
 export const PostIndexPage: VFC = () => {
   const history = useHistory();
@@ -11,6 +12,11 @@ export const PostIndexPage: VFC = () => {
   const onClickPostCreatePage = useCallback(() => history.push("/post/new"),[history]);
 
   const [posts, setPosts] = useState<Array<TodoType>>([])
+
+  const onClickPostDelete = (postId: number) => {
+    PostDelete(postId);
+    // TODO: 削除した時、値を更新したい！
+  }
 
   useEffect(() => {
     axios.get<Array<TodoType>>(postsIndexUrl)
@@ -29,7 +35,7 @@ export const PostIndexPage: VFC = () => {
               <p>詳細：{post.details}</p>
               <div>
                 <button onClick={onClickPostEditPage}>編集</button>
-                <button>削除</button>
+                <button onClick= {() => {onClickPostDelete(post.id)} }>削除</button>
               </div>
             </div>
           ))}
