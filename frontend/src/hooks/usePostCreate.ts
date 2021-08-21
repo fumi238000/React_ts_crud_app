@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { postsCreateUrl} from '../urls';
+import { postsCreateUrl } from '../urls';
 
-const PostCreate =(title: string, details: string) => {
+export const PostCreate =(title: string, details: string) => {
       //TODO: できれば以下の書き方で実装したい！
       // const data = {title: title, details: details,user_id: 1 }
       axios.post(postsCreateUrl, {
@@ -20,5 +20,3 @@ const PostCreate =(title: string, details: string) => {
           alert("作成できませんでした");
         });
 }
-
-export { PostCreate }
