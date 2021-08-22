@@ -1,29 +1,34 @@
-import React, { useState, useEffect, useCallback, FC} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios'
 
 import { postsIndexUrl } from '../../../urls';
 import { TodoType } from '../../../types/api/post';
 import { PostDelete } from '../../../hooks/usePostDelete';
+// import { PostContext } from '../../../providers/PostProvider';
 
-export const PostIndexPage: FC = () => {
+
+export const PostIndexPage = () => {
   const history = useHistory();
   const onClickPostEditPage = useCallback(() => history.push("/post/edit"),[history]);
   const onClickPostCreatePage = useCallback(() => history.push("/post/new"),[history]);
 
-  const [posts, setPosts] = useState<Array<TodoType>>([])
+  //これを呼びたい！使いたい！
+  // const { posts, setPosts } = useContext(PostContext);
 
-  const onClickPostDelete = (postId: number) => {
-    PostDelete(postId);
-    setPosts(posts.filter(post => post.id !== postId))
-  }
+  const [posts, setPosts] = useState<Array<TodoType>>([])
 
   useEffect(() => {
     axios.get<Array<TodoType>>(postsIndexUrl)
     .then(res => {
       setPosts(res.data);
     })
-  },[])
+  },[setPosts])
+
+  const onClickPostDelete = (postId: number) => {
+    PostDelete(postId);
+    setPosts(posts.filter(post => post.id !== postId))
+  }
 
   return (
       <div>
