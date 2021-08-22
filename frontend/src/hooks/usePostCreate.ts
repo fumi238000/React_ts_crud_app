@@ -12,11 +12,9 @@ export const PostCreate =(title: string, details: string) => {
       })
       .then(res => {
           console.log(res);
-          alert("新規作成しました");
-          // alert(`${data.title}を登録完了`);
+          window.location.reload() //TODO: 将来stateに置き換える
         })
         .catch(error => {
           console.log(error);
-          alert("作成できませんでした");
         });
 }
