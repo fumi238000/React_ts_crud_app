@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/react';
 import { useState, memo, VFC, ChangeEvent } from "react";
 import { useHistory } from "react-router-dom";
 import { PostCreate } from "../../../hooks/usePostCreate";
@@ -20,7 +21,7 @@ export const PostCreatePage: VFC = memo(() => {
 
   return (
     <>
-      <button onClick={onClickBack}>戻る</button>
+      <Button colorScheme="blue" onClick={onClickBack}>戻る</Button>
       <h1>新規作成</h1>
       <p>タイトル</p>
       <input placeholder="タイトル"
@@ -35,7 +36,7 @@ export const PostCreatePage: VFC = memo(() => {
       />
       <br/>
       <br/>
-      <button onClick={onClickCreatePost}>新規作成</button>
+      <Button colorScheme="blue" onClick={onClickCreatePost}>新規作成</Button>
     </>
   )
 });
