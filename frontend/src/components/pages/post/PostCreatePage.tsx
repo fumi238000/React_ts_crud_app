@@ -16,7 +16,7 @@ export const PostCreatePage: VFC = memo(() => {
     PostCreate(inputPostTitle,inputPostDetails);
     //ここで値を更新したい！
     // setPosts(posts.filter(post => post.id ＋？ postId)) //今回作成したものを追加して更新する
-    history.push("/post"); //もしくはここで渡す？
+    history.push("/posts"); //もしくはここで渡す？
   }
 
   return (
