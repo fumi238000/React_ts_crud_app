@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Button, Box } from '@chakra-ui/react';
+import { Button, Box, Heading } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios'
 
@@ -32,7 +32,7 @@ export const PostIndexPage = () => {
 
   return (
       <div>
-        <h1>TODOリスト一覧画面</h1>
+        <Heading fontSize="2xl" p={4}>投稿一覧</Heading>
         <Box textAlign="right" px={4} py={8} m={4}>
           <Button colorScheme="blue" onClick={onClickPostCreatePage}>新規作成</Button>
         </Box>
