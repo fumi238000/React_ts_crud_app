@@ -37,8 +37,8 @@ export const PostIndexPage = () => {
           <Button colorScheme="blue" onClick={onClickPostCreatePage}>新規作成</Button>
         </Box>
         { posts.map((post) => (
-             <PostCard   postId={post.id} postTitle={post.title} postDetails={post.details} />
-            //     <Button colorScheme="green" onClick={onClickPostEditPage}>編集</Button>
+             <PostCard postId={post.id} postTitle={post.title} postDetails={post.details} />
+                // <Button colorScheme="green" onClickPostEditPage={onClickPostEditPage}>編集</Button>
             //     <Button colorScheme= "red" onClick= {() => {onClickPostDelete(post.id)} }>削除</Button>
           ))}
       </div>

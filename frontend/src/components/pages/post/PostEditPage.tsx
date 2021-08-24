@@ -1,18 +1,26 @@
 import { memo, VFC } from "react";
-import { useHistory } from "react-router-dom";
+import { PostForm } from '../../molecules/PostForm';
+import { GoBackButton } from '../../atms/button/GoBackButton';
 
-export const PostEditPage: VFC = memo(() => {
-  const history = useHistory();
-  const onClickBack = () => history.goBack();
+type Props = {
+  postTitle?: string;
+  postDetails?: string;
+}
+
+export const PostEditPage: VFC<Props> = memo(() => {
+  // const {postTitle, postDetails } = props;
 
   return (
-    <div>
-      <button onClick={onClickBack}>戻る</button>
-      <h1>投稿編集ページ</h1>
-      <input placeholder="TODOを入力する" />
-      <button onClick={onClickBack}>更新</button>
-    </div>
+    <>
+      <GoBackButton/>
+      <PostForm
+        actionName={"編集"}
+        postTitle={"ここにタイトルが渡る予定"}
+        // postTitle={postTitle}
+        postDetails={"ここに詳細が渡る予定"}
+        // postDetails={postDetails}
+        actionButtonName={"更新する"}
+      />
+    </>
   )
 });
-  
-
