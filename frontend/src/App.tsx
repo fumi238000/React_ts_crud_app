@@ -12,7 +12,6 @@ function App() {
     <ChakraProvider theme={theme}>
     <PostProvider>
       <BrowserRouter>
-        <h1>TODOアプリ</h1>
         <Router/>
       </BrowserRouter>
     </PostProvider>
