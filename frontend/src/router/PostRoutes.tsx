@@ -14,7 +14,7 @@ export const PostRoutes = [
     children: <PostCreatePage/>
   },
   {
-    path: "/:id",
+    path: "/:postId",
     exact: false,
     children: <PostEditPage/>
   },

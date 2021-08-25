@@ -7,7 +7,6 @@ import { usePostIndex } from '../../../hooks/usePostIndex';
 
 export const PostIndexPage = () => {
   const history = useHistory();
-  const onClickPostEditPage = useCallback(() => history.push("/posts/edit"),[history]);
   const onClickPostCreatePage = useCallback(() => history.push("/posts/new"),[history]);
 
   const { getPosts, posts} = usePostIndex();

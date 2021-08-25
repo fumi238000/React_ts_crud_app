@@ -2,9 +2,10 @@ import { useState, useEffect,ChangeEvent, memo, VFC } from "react";
 import { Box, Button, Divider, Flex, Heading, Input, Stack  } from "@chakra-ui/react";
 import { useHistory } from "react-router";
 import { PostCreate } from "../../hooks/usePostCreate";
+import { PostUpdate } from "../../hooks/usePostUpdate";
 
 type Props = {
-  postId?: string;
+  postId?: any;
   postTitle: string;
   postDetails: string;
   actionName: string;
@@ -12,24 +13,32 @@ type Props = {
 }
 
 export const PostForm: VFC<Props> = memo((props) => {
-  const { postTitle, postDetails, actionName, actionButtonName } = props;
+  const { postId, postTitle, postDetails, actionName, actionButtonName } = props;
 
   const history = useHistory();
   const [inputPostTitle, setInputPostTitle] = useState('')
   const [inputPostDetails, setInputPostDetails] = useState('')
   const onChangeInputPostTitle = (e: ChangeEvent<HTMLInputElement>) => setInputPostTitle(e.target.value);
   const onChangeInputPostDetails = (e: ChangeEvent<HTMLInputElement>) => setInputPostDetails(e.target.value);
-  
+
+  useEffect(() => {
+    setInputPostTitle(postTitle);
+    setInputPostDetails(postDetails);
+  },[postTitle, postDetails])
+
+
+  //この2つを切り替えて使用したい。
   const onClickCreatePost = () => {
     PostCreate(inputPostTitle,inputPostDetails);
     history.push("/posts");
   }
 
-  useEffect(() => {
-    setInputPostTitle(postTitle);
-    setInputPostDetails(postDetails);
-  },[postDetails, postTitle])
-  
+  const onClickUpdatePost = () => {
+    console.log(postId, inputPostTitle, inputPostDetails);
+    PostUpdate(postId, inputPostTitle, inputPostDetails)
+    history.push("/posts");
+  }
+
   return (
 
       <Flex align="center" justify="center" height="50vh">
@@ -54,9 +63,14 @@ export const PostForm: VFC<Props> = memo((props) => {
                  onChange={onChangeInputPostDetails}
             />
 
-            <Button bg="blue.500" color="white" _hover={{ opacity: 0.7}} onClick={onClickCreatePost}>
+            {/* //ここで条件分岐か？ */}
+            <Button bg="blue.500" color="white" _hover={{ opacity: 0.7}} onClick={onClickUpdatePost}>
               {actionButtonName}
             </Button>
+
+            {/* <Button bg="blue.500" color="white" _hover={{ opacity: 0.7}} onClick={onClickCreatePost}>
+              {actionButtonName}
+            </Button> */}
 
           </Stack>
         </Box>
