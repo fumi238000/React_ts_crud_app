@@ -1,6 +1,6 @@
 import { memo, VFC } from "react";
 import { useHistory } from "react-router";
-import {Box, Button, Flex, Heading, Divider, Stack} from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Divider, Stack } from "@chakra-ui/react";
 import { usePostDelete } from "../../../hooks/usePostDelete";
 
 type Props = {
@@ -10,16 +10,16 @@ type Props = {
 };
 
 export const PostCard: VFC<Props> = memo((props) => {
-   const { postId, postTitle, postDetails } = props;
-   const history = useHistory();
-   const { deletePost } = usePostDelete();
+  const { postId, postTitle, postDetails } = props;
+  const history = useHistory();
+  const { deletePost } = usePostDelete();
 
    const onClickPostEditPage = () => {
      history.push({
        pathname: `/posts/${postId}`,
        state: {postTitle,postDetails}
       });
-    };
+   };
 
    const onClickPostDelete = (postId: number) => {
     deletePost(postId);
