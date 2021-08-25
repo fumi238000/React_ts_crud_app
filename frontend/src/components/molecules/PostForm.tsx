@@ -14,7 +14,6 @@ type Props = {
 
 export const PostForm: VFC<Props> = memo((props) => {
   const { postId, postTitle, postDetails, actionName, actionButtonName } = props;
-
   const history = useHistory();
   const [inputPostTitle, setInputPostTitle] = useState('')
   const [inputPostDetails, setInputPostDetails] = useState('')
@@ -26,8 +25,6 @@ export const PostForm: VFC<Props> = memo((props) => {
     setInputPostDetails(postDetails);
   },[postTitle, postDetails])
 
-
-  //この2つを切り替えて使用したい。
   const onClickCreatePost = () => {
     PostCreate(inputPostTitle,inputPostDetails);
     history.push("/posts");
@@ -40,41 +37,34 @@ export const PostForm: VFC<Props> = memo((props) => {
   }
 
   return (
-
-      <Flex align="center" justify="center" height="50vh">
-      <Box bg="white" w="2xl" p={4} borderRadius="md" shadow="md">
-          <Heading as="h1" size="lg" textAlign="center" py={4}>
-            { actionName }
-          </Heading>
-          
-          <Divider my={4}></Divider>
-
-          <Stack spacing={4} py={4} px={6}>
-
-            <p>タイトル</p>
-            <Input placeholder="タイトル"
-                 value={inputPostTitle}
-                 onChange={onChangeInputPostTitle}
-            />
-
-            <p>詳細</p>
-            <Input placeholder="詳細"
-                 value={inputPostDetails}
-                 onChange={onChangeInputPostDetails}
-            />
-
-            {/* //ここで条件分岐か？ */}
+    <Flex align="center" justify="center" height="50vh">
+    <Box bg="white" w="2xl" p={4} borderRadius="md" shadow="md">
+        <Heading as="h1" size="lg" textAlign="center" py={4}>
+          { actionName }
+        </Heading>
+        <Divider my={4}></Divider>
+        <Stack spacing={4} py={4} px={6}>
+          <p>タイトル</p>
+          <Input placeholder="タイトル"
+               value={inputPostTitle}
+               onChange={onChangeInputPostTitle}
+          />
+          <p>詳細</p>
+          <Input placeholder="詳細"
+               value={inputPostDetails}
+               onChange={onChangeInputPostDetails}
+          />
+          { actionName === "編集" ? 
             <Button bg="blue.500" color="white" _hover={{ opacity: 0.7}} onClick={onClickUpdatePost}>
               {actionButtonName}
             </Button>
-
-            {/* <Button bg="blue.500" color="white" _hover={{ opacity: 0.7}} onClick={onClickCreatePost}>
-              {actionButtonName}
-            </Button> */}
-
-          </Stack>
-        </Box>
-      </Flex>
-
+          :
+          <Button bg="blue.500" color="white" _hover={{ opacity: 0.7}} onClick={onClickCreatePost}>
+            {actionButtonName}
+          </Button>
+          }
+        </Stack>
+      </Box>
+    </Flex>
   );
 });
