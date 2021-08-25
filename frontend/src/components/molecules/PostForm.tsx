@@ -19,12 +19,9 @@ export const PostForm: VFC<Props> = memo((props) => {
   const onChangeInputPostTitle = (e: ChangeEvent<HTMLInputElement>) => setInputPostTitle(e.target.value);
   const onChangeInputPostDetails = (e: ChangeEvent<HTMLInputElement>) => setInputPostDetails(e.target.value);
   
-
   const onClickCreatePost = () => {
     PostCreate(inputPostTitle,inputPostDetails);
-    //ここで値を更新したい！
-    // setPosts(posts.filter(post => post.id ＋？ postId)) //今回作成したものを追加して更新する
-    history.push("/posts"); //もしくはここで渡す？
+    history.push("/posts");
   }
 
   useEffect(() => {

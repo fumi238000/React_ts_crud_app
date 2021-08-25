@@ -3,13 +3,12 @@ import { PostForm } from '../../molecules/PostForm';
 import { GoBackButton } from '../../atms/button/GoBackButton';
 
 type Props = {
-  postTitle?: string;
-  postDetails?: string;
+  postTitle?: string | null;
+  postDetails?: string | null;
+  Hogehoge?: string | null;
 }
 
 export const PostEditPage: VFC<Props> = memo(() => {
-  // const {postTitle, postDetails } = props;
-
   return (
     <>
       <GoBackButton/>

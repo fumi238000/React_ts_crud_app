@@ -1,6 +1,7 @@
 import { useCallback, memo, VFC } from "react";
 import { useHistory } from "react-router";
 import {Box, Button, Flex, Heading, Divider, Stack} from "@chakra-ui/react";
+import { PostDelete } from "../../../hooks/usePostDelete";
 
 type Props = {
   postId: number;
@@ -11,14 +12,13 @@ type Props = {
 export const PostCard: VFC<Props> = memo((props) => {
    const { postId, postTitle, postDetails } = props;
    const history = useHistory();
+
    const onClickPostEditPage = useCallback(() => history.push("/posts/edit"),[history]);
-
-   const onClickPostDelete = () => { alert("削除します") };
-
-  //  const onClickPostDelete = (postId: number) => {
-    // PostDelete(postId);
-    // setPosts(posts.filter(post => post.id !== postId))
-  // }
+   const onClickPostDelete = (postId: number) => {
+    PostDelete(postId);
+    window.location.reload()
+    // setPosts(posts.filter(post => post.id !== postId)) //将来的にこちらに置き換える
+  }
 
    return (
    <div key = {postId}>
@@ -30,7 +30,7 @@ export const PostCard: VFC<Props> = memo((props) => {
         <Heading size="sm" textAlign="left" px={10}>{postDetails}</Heading>
         <Box textAlign="right">
           <Button bg="green.500" color="white" _hover={{ opacity: 0.7}} m={1} onClick={onClickPostEditPage}>編集</Button>
-          <Button bg="red.500" color="white" _hover={{ opacity: 0.7}} m={1} onClick={onClickPostDelete}>削除</Button>
+          <Button bg="red.500" color="white" _hover={{ opacity: 0.7}} m={1} onClick= {() => {onClickPostDelete(postId)}}>削除</Button>
         </Box>
       </Stack>
     </Box>
