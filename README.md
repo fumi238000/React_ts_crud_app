@@ -1,4 +1,6 @@
 # React_ts_crud_app
+### 目的
+- TODOリストを作成し、React + TypeScript + RailsAPIを学習する
 
 ## frontend
 ### React + TS
