@@ -5,16 +5,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { Router } from './router/Router';
 import './App.css';
 
-import { PostProvider } from './providers/PostProvider';
-
 function App() {
+
   return (
     <ChakraProvider theme={theme}>
-    <PostProvider>
       <BrowserRouter>
         <Router/>
       </BrowserRouter>
-    </PostProvider>
     </ChakraProvider>
   );
 }

@@ -1,6 +1,6 @@
 module V1
   class PostsController < ApplicationController
-    before_action :set_post, only: %i[destroy]
+    before_action :set_post, only: %i[update destroy]
 
     def index
       posts = Post.order(id: :desc)
@@ -15,6 +15,14 @@ module V1
         render json: post
       else
         render json: post.errors, status: :unprocessable_entity
+      end
+    end
+
+    def update
+      if @post.update(post_params)
+        render json: @post
+      else
+        render json: @post.errors, status: :unprocessable_entity
       end
     end
 

@@ -65,15 +65,63 @@ RSpec.describe "V1::Posts", type: :request do
     # end
   end
 
+  describe "PATCH #update" do
+    subject { patch(v1_post_path(post_id), params: post_params) }
+    let(:post) { create(:post, user_id: current_user.id) }
+    let(:post_id) { post.id }
+
+    # context "トークン認証情報がない場合" do
+    #   subject { patch(v1_post_path(post_id), params: post_params) }
+    #   let(:post_params) { { post: attributes_for(:post, user_id: current_user.id) } }
+    #   it "エラーする" do
+    #     subject
+    #     expect(response).to have_http_status(:unauthorized)
+    #   end
+    # end
+
+    context "パラメータが正常の時 && 本人の投稿の場合" do
+      let(:post_params) { { post: attributes_for(:post, user_id: current_user.id) } }
+      it "投稿が更新されること" do
+        new_post = post_params[:post]
+        expect { subject }
+          .to change { post.reload.title }
+          .from(post.title).to(new_post[:title])
+          .and change { post.reload.details }
+          .from(post.details).to(new_post[:details])
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    # context "パラメータが正常の時 && 本人以外の投稿の場合" do
+    #   let(:post_params) { { post: attributes_for(:post, user_id: user.id) } }
+    #   let(:other_post) { create(:post, user_id: user.id) }
+    #   let(:post_id) { other_post.id }
+    #   it "エラーする" do
+    #     expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
+    #   end
+    # end
+
+    # context "パラメータが異常なとき" do
+    #   let(:post_params) { { post: attributes_for(:post, :invalid, user_id: current_user.id) } }
+    #   it "投稿が更新されないこと" do
+    #     # expect { subject }.not_to change { post.reload.title }
+    #     # expect { subject }.not_to change { post.reload.details }
+    #     expect(response).to have_http_status(:unprocessable_entity)
+    #     json = JSON.parse(response.body)
+    #     expect(json["title"]).to include "を入力してください"
+    #     expect(json["details"]).to include "を入力してください"
+    #   end
+    # end
+  end
+
   describe "DELETE #destroy" do
-    # subject { delete(v1_post_path(post.id), headers: headers) }
-    subject { delete(v1_post_path(post.id)) }
+    subject { delete(v1_post_path(post.id), headers: headers) }
 
     context "本人の投稿の場合" do
       let!(:post) { create(:post) }
-      it "投稿が削除されること" do
+      xit "投稿が削除されること" do
         expect { subject }.to change { Post.count }.by(-1)
-        expect(response).to have_http_status(:no_content)
+        expect(response).to have_http_status(:no_details)
       end
     end
 

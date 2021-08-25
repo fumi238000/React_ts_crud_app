@@ -14,7 +14,7 @@ export const PostRoutes = [
     children: <PostCreatePage/>
   },
   {
-    path: "/edit", //TODO: 後にidを含め、動的に実装する
+    path: "/:postId",
     exact: false,
     children: <PostEditPage/>
   },
