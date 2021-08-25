@@ -1,7 +1,7 @@
 import { memo, VFC } from "react";
 import { useHistory } from "react-router";
-import {Box, Button, Flex, Heading, Divider, Stack} from "@chakra-ui/react";
-import { PostDelete } from "../../../hooks/usePostDelete";
+import { Box, Button, Flex, Heading, Divider, Stack } from "@chakra-ui/react";
+import { usePostDelete } from "../../../hooks/usePostDelete";
 
 type Props = {
   postId: number;
@@ -10,20 +10,21 @@ type Props = {
 };
 
 export const PostCard: VFC<Props> = memo((props) => {
-   const { postId, postTitle, postDetails } = props;
-   const history = useHistory();
+  const { postId, postTitle, postDetails } = props;
+  const history = useHistory();
+  const { deletePost } = usePostDelete();
 
    const onClickPostEditPage = () => {
      history.push({
        pathname: `/posts/${postId}`,
        state: {postTitle,postDetails}
       });
-    };
+   };
 
    const onClickPostDelete = (postId: number) => {
-    PostDelete(postId);
+    deletePost(postId);
     window.location.reload()
-    // setPosts(posts.filter(post => post.id !== postId)) //将来的にこちらに置き換える
+    // setPosts(posts.filter(post => post.id !== post.id)) //将来的にこちらに置き換える
   }
 
    return (

@@ -1,8 +1,7 @@
 import { useState, useEffect,ChangeEvent, memo, VFC } from "react";
 import { Box, Button, Divider, Flex, Heading, Input, Stack  } from "@chakra-ui/react";
-import { useHistory } from "react-router";
-import { PostCreate } from "../../hooks/usePostCreate";
-import { PostUpdate } from "../../hooks/usePostUpdate";
+import { usePostCreate } from "../../hooks/usePostCreate";
+import { usePostUpdate } from "../../hooks/usePostUpdate";
 
 type Props = {
   postId?: any;
@@ -14,11 +13,12 @@ type Props = {
 
 export const PostForm: VFC<Props> = memo((props) => {
   const { postId, postTitle, postDetails, actionName, actionButtonName } = props;
-  const history = useHistory();
   const [inputPostTitle, setInputPostTitle] = useState('')
   const [inputPostDetails, setInputPostDetails] = useState('')
   const onChangeInputPostTitle = (e: ChangeEvent<HTMLInputElement>) => setInputPostTitle(e.target.value);
-  const onChangeInputPostDetails = (e: ChangeEvent<HTMLInputElement>) => setInputPostDetails(e.target.value);
+  const onChangeInputPostDetails = (e: ChangeEvent<HTMLInputElement>) => setInputPostDetails(e.target.value);  
+  const { createPost } = usePostCreate();
+  const { updatePost } = usePostUpdate();
 
   useEffect(() => {
     setInputPostTitle(postTitle);
@@ -26,14 +26,11 @@ export const PostForm: VFC<Props> = memo((props) => {
   },[postTitle, postDetails])
 
   const onClickCreatePost = () => {
-    PostCreate(inputPostTitle,inputPostDetails);
-    history.push("/posts");
+    createPost(inputPostTitle,inputPostDetails);
   }
 
   const onClickUpdatePost = () => {
-    console.log(postId, inputPostTitle, inputPostDetails);
-    PostUpdate(postId, inputPostTitle, inputPostDetails)
-    history.push("/posts");
+    updatePost(postId, inputPostTitle, inputPostDetails)
   }
 
   return (
