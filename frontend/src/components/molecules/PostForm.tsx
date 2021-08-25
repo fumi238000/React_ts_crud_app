@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { PostCreate } from "../../hooks/usePostCreate";
 
 type Props = {
+  postId?: string;
   postTitle: string;
   postDetails: string;
   actionName: string;

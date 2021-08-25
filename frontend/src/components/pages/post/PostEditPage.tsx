@@ -1,24 +1,27 @@
-import { memo, VFC } from "react";
+import { memo } from "react";
 import { PostForm } from '../../molecules/PostForm';
 import { GoBackButton } from '../../atms/button/GoBackButton';
+import { useLocation, useParams } from "react-router-dom";
 
 type Props = {
-  postTitle?: string | null;
-  postDetails?: string | null;
-  Hogehoge?: string | null;
+  postId?: number;
+  postTitle: string;
+  postDetails: string;
 }
 
-export const PostEditPage: VFC<Props> = memo(() => {
+export const PostEditPage = memo(() => {
+  const { state } = useLocation<Props>();
+  const { postId } = useParams<any>();
+
   return (
     <>
       <GoBackButton/>
       <PostForm
-        actionName={"編集"}
-        postTitle={"ここにタイトルが渡る予定"}
-        // postTitle={postTitle}
-        postDetails={"ここに詳細が渡る予定"}
-        // postDetails={postDetails}
-        actionButtonName={"更新する"}
+        postId = { postId }
+        postTitle = {state.postTitle}
+        postDetails = {state.postDetails}
+        actionName = {"編集"}
+        actionButtonName = {"更新する"}
       />
     </>
   )

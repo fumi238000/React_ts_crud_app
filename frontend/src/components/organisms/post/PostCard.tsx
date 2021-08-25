@@ -1,4 +1,4 @@
-import { useCallback, memo, VFC } from "react";
+import { memo, VFC } from "react";
 import { useHistory } from "react-router";
 import {Box, Button, Flex, Heading, Divider, Stack} from "@chakra-ui/react";
 import { PostDelete } from "../../../hooks/usePostDelete";
@@ -13,7 +13,13 @@ export const PostCard: VFC<Props> = memo((props) => {
    const { postId, postTitle, postDetails } = props;
    const history = useHistory();
 
-   const onClickPostEditPage = useCallback(() => history.push("/posts/edit"),[history]);
+   const onClickPostEditPage = () => {
+     history.push({
+       pathname: `/posts/${postId}`,
+       state: {postTitle,postDetails}
+      });
+    };
+
    const onClickPostDelete = (postId: number) => {
     PostDelete(postId);
     window.location.reload()
