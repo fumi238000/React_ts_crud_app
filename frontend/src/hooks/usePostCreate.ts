@@ -1,21 +1,32 @@
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 import { postsCreateUrl } from '../urls';
+import { useMessage } from './useMessage';
 
-export const PostCreate =(title: string, details: string) => {
-  //TODO: できれば以下の書き方で実装したい！
-  // const data = {title: title, details: details,user_id: 1 }
-  axios.post(postsCreateUrl, {
-    title: title,
-    details: details,
-    user_id: 1
-  })
-  .then(res => {
-    console.log(res);
-    window.location.reload() //TODO: 将来stateに置き換える
+export const usePostCreate =() => {
+  const history = useHistory();
+  const { showMessage } = useMessage();
 
+  const createPost = (postTitle: string, postDetails: string) => {
+    axios
+      .post(postsCreateUrl, {
+        user_id: 1,
+        title: postTitle,
+        details: postDetails,
+      })
+    .then(res => {
+      console.log(res);
+      // const { id } = res.data.id;
+      showMessage({title: "投稿を作成しました", status: "success"})
+      history.push("/posts");
     })
     .catch(error => {
       console.log(error);
+      showMessage({ title: "作成に失敗しました", status: "error"})
     });
+  };
+
+  //TODO: ここで作成したPostのidを返して、無駄なAPI通信を省きたい
+  return { createPost }
 }
