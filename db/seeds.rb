@@ -1,6 +1,6 @@
 # User
 User.find_or_create_by!(email: "example@example.com") do |u|
-  u.email = "example@example.com"
+  u.email = "test@example.com"
   u.password = "password"
   puts "Userの初期データ導入完了"
 end
