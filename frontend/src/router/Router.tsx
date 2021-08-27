@@ -5,10 +5,12 @@ import { PostRoutes } from "./PostRoutes";
 import { LoginPage } from "../components/pages/user/LoginPage";
 import { HeaderLayout } from "../components/templates/HeaderLayout";
 import { MyPage } from "../components/pages/user/MyPage";
+import { LoginUserProvider } from "../providers/LoginUserProvider";
 
 export const Router: VFC = memo(() => {
   return(
     <Switch>
+      <LoginUserProvider>
       <Route path="/login">
         <HeaderLayout>
           <LoginPage/>
@@ -37,7 +39,7 @@ export const Router: VFC = memo(() => {
         </Switch>
       )}>
       </Route>
-
+      </LoginUserProvider>
     </Switch>
   )
 });
