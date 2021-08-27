@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
@@ -7,8 +8,11 @@ import { useMessage } from './useMessage';
 export const usePostCreate =() => {
   const history = useHistory();
   const { showMessage } = useMessage();
+  const [loading, setLoading] = useState(false);
 
   const createPost = (postTitle: string, postDetails: string) => {
+    setLoading(true)
+
     axios
       .post(postsCreateUrl, {
         user_id: 1,
@@ -19,14 +23,16 @@ export const usePostCreate =() => {
       console.log(res);
       // const { id } = res.data.id;
       showMessage({title: "投稿を作成しました", status: "success"})
+      setLoading(false)
       history.push("/posts");
     })
     .catch(error => {
       console.log(error);
+      setLoading(false)
       showMessage({ title: "作成に失敗しました", status: "error"})
     });
   };
 
   //TODO: ここで作成したPostのidを返して、無駄なAPI通信を省きたい
-  return { createPost }
+  return { createPost, loading }
 }

@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useCallback, useContext } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Button, Box, Heading } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 
 import { PostCard } from '../../organisms/post/PostCard';
 import { usePostIndex } from '../../../hooks/usePostIndex';
-import { LoginUserContext } from '../../../providers/LoginUserProvider';
+// import { LoginUserContext } from '../../../providers/LoginUserProvider';
 
 export const PostIndexPage = () => {
   const history = useHistory();
   const onClickPostCreatePage = useCallback(() => history.push("/posts/new"),[history]);
-  const { loginUser  } = useContext(LoginUserContext);
+  // const { loginUser  } = useContext(LoginUserContext);
   const { getPosts, posts} = usePostIndex();
   useEffect(() => getPosts(),[]);
 
