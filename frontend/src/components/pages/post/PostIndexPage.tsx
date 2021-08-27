@@ -5,13 +5,12 @@ import { useHistory } from 'react-router-dom';
 
 import { PostCard } from '../../organisms/post/PostCard';
 import { usePostIndex } from '../../../hooks/usePostIndex';
-// import { LoginUserContext } from '../../../providers/LoginUserProvider';
 
 export const PostIndexPage = () => {
   const history = useHistory();
   const onClickPostCreatePage = useCallback(() => history.push("/posts/new"),[history]);
-  // const { loginUser  } = useContext(LoginUserContext);
   const { getPosts, posts} = usePostIndex();
+  // todo: postsを持っていない場合のみ取得する
   useEffect(() => getPosts(),[]);
 
   return (

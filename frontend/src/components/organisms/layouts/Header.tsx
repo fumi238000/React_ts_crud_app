@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Flex, Heading, Link, Box, useDisclosure } from "@chakra-ui/react";
-import { memo, useCallback, VFC } from "react";
+import { memo, useCallback, VFC, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { MenuIconButton } from "../../atms/button/MenuIconButton";
 import { MenuDrawer } from "../../molecules/MenuDrawer";
+import { LoginUserContext } from '../../../providers/LoginUserProvider';
 
 export const Header: VFC = memo(() => {
   const { isOpen, onOpen, onClose} = useDisclosure();
@@ -11,10 +13,12 @@ export const Header: VFC = memo(() => {
   const onClickPostIndex = useCallback(() => history.push("/posts"),[history]);
   const onClickPostNew = useCallback(() => history.push("/posts/new"),[history]);
   const onClickMyPage = useCallback(() => history.push("/mypage"),[history]);
+  const onClickLogOut = () => alert("ログアウト");
+  const { loginUser, userLoginStatus } = useContext(LoginUserContext);
 
   return (
   <>
-    <Flex 
+    <Flex
       as="nav"
       bg="blue.500"
       color="gray.50"
@@ -22,34 +26,44 @@ export const Header: VFC = memo(() => {
       justify="space-between"
       padding={{base: 3, md: 5}}
     >
-      <Flex align="center" as="a" mr={8} _hover={{ cursor: "pointer"}}>
+      <Flex align="center" mr={8}>
         <Heading as="h1" fontSize={{base: "md", md: "lg"}}>
           TODOアプリ
         </Heading>
+
       </Flex>
-  
-      <Flex 
+
+      <Flex
          align="center"
          fontSize="sm"
          display={{ base: "none", md: "flex"}}
        >
-        <Box pr={4}><Link onClick={onClickMyPage}>マイページ</Link></Box> 
-        <Box pr={4}><Link onClick={onClickLoginPage}>ログイン画面</Link></Box> 
-        <Box pr={4}><Link onClick={onClickPostIndex}>投稿新規作成</Link></Box> 
-        <Box><Link onClick={onClickPostNew}>投稿新規作成</Link></Box> 
+      { userLoginStatus ?
+        <>
+          <Box pr={4}><Link onClick={onClickPostIndex}>投稿一覧</Link></Box>
+          <Box pr={4}><Link onClick={onClickPostNew}>投稿新規作成</Link></Box>
+          <Box pr={4}><Link onClick={onClickMyPage}>マイページ({loginUser?.userId}(Email))</Link></Box>
+          <Box><Link onClick={onClickLogOut}>ログアウト</Link></Box>
+        </>
+        :
+        <>
+          <Box pr={4}><Link onClick={onClickLoginPage}>ログイン画面</Link></Box>
+          {/* <Box><Link onClick={onClickPostIndex}>投稿一覧</Link></Box> */}
+        </>
+       }
       </Flex>
       <MenuIconButton onOpen={onOpen}/>
     </Flex>
-    
-    <MenuDrawer 
+
+    <MenuDrawer
       onClose={onClose}
       isOpen={isOpen}
       onClickMyPage={onClickMyPage}
       onClickPostIndex={onClickPostIndex}
       onClickPostNew={onClickPostNew}
       onClickLoginPage={onClickLoginPage}
+      userLoginStatus = { userLoginStatus }
        />
-
   </>
 
   );

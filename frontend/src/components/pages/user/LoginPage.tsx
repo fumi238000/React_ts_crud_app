@@ -22,14 +22,15 @@ export const LoginPage: VFC = memo(() => {
           <Stack spacing={4} py={4} px={6}>
             <p>Email</p>
             <Input placeholder="Email"
-                 value={inputEmail}
-                 onChange={onChangeInputEmail}
+              type="email"
+              value={inputEmail}
+              onChange={onChangeInputEmail}
             />
             <p>パスワード</p>
             <Input placeholder="パスワード"
-                 type="password"
-                 value={inputPassword}
-                 onChange={onChangeInputUserPassword}
+              type="password"
+              value={inputPassword}
+              onChange={onChangeInputUserPassword}
             />
             <Button
               bg="blue.500"

@@ -11,7 +11,7 @@ export const useUserLogin = () => {
   const history = useHistory();
   const { showMessage } = useMessage();
   const [loading, setLoading] = useState(false);
-  const { setLoginUser } = useContext(LoginUserContext);
+  const { setLoginUser, setUserLoginStatus } = useContext(LoginUserContext);
 
   const login = (email: string, password: string) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -27,10 +27,11 @@ export const useUserLogin = () => {
           accessToken: res.headers[`access-token`],
           client: res.headers["client"],
           uid: (res.headers[`uid`])
-        })
+      })
 
         showMessage({title: "ログインしました", status: "success"})
         setLoading(false)
+        setUserLoginStatus(true)
         history.push("/posts");
       })
       .catch(error => {
