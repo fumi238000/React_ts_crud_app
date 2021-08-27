@@ -17,7 +17,7 @@ export const PostForm: VFC<Props> = memo((props) => {
   const [inputPostDetails, setInputPostDetails] = useState('')
   const onChangeInputPostTitle = (e: ChangeEvent<HTMLInputElement>) => setInputPostTitle(e.target.value);
   const onChangeInputPostDetails = (e: ChangeEvent<HTMLInputElement>) => setInputPostDetails(e.target.value);  
-  const { createPost } = usePostCreate();
+  const { createPost, loading } = usePostCreate();
   const { updatePost } = usePostUpdate();
 
   useEffect(() => {
@@ -51,15 +51,32 @@ export const PostForm: VFC<Props> = memo((props) => {
                value={inputPostDetails}
                onChange={onChangeInputPostDetails}
           />
-          { actionName === "編集" ? 
-            <Button bg="blue.500" color="white" _hover={{ opacity: 0.7}} onClick={onClickUpdatePost}>
+          { actionName === "編集" &&
+            <Button
+              bg="blue.500"
+              color="white"
+              _hover={{ opacity: 0.7}}
+              onClick={onClickUpdatePost}
+              isLoading = {loading}
+              isDisabled = {inputPostTitle === '' ||inputPostDetails === '' }
+            >
               {actionButtonName}
             </Button>
-          :
-          <Button bg="blue.500" color="white" _hover={{ opacity: 0.7}} onClick={onClickCreatePost}>
+           }
+
+           { actionName === "新規作成" &&
+          <Button
+            bg="blue.500"
+            color="white"
+            _hover={{ opacity: 0.7}}
+            onClick={onClickCreatePost}
+            isLoading = {loading}
+            isDisabled = {inputPostTitle === '' ||inputPostDetails === '' }
+          >
             {actionButtonName}
           </Button>
           }
+
         </Stack>
       </Box>
     </Flex>
