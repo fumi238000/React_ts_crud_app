@@ -8,7 +8,7 @@ export const LoginPage: VFC = memo(() => {
   const [inputPassword, setinputPassword] = useState<string>('')
   const onChangeInputEmail = (e: ChangeEvent<HTMLInputElement>) => setinputEmail(e.target.value);
   const onChangeInputUserPassword = (e: ChangeEvent<HTMLInputElement>) => setinputPassword(e.target.value);
-  const { login } = useUserLogin();
+  const { login, loading } = useUserLogin();
 
   const onClickLogin = () => {
     login(inputEmail, inputPassword);
@@ -31,7 +31,14 @@ export const LoginPage: VFC = memo(() => {
                  value={inputPassword}
                  onChange={onChangeInputUserPassword}
             />
-            <Button bg="blue.500" color="white" _hover={{ opacity: 0.7}} onClick= {onClickLogin}>
+            <Button
+              bg="blue.500"
+              color="white"
+              _hover={{ opacity: 0.7}}
+              onClick= {onClickLogin}
+              isLoading = {loading}
+              isDisabled = {inputPassword === '' || inputPassword === ''}
+              >
               ログイン
             </Button>
           </Stack>
