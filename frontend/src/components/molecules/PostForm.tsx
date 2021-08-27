@@ -57,7 +57,8 @@ export const PostForm: VFC<Props> = memo((props) => {
               color="white"
               _hover={{ opacity: 0.7}}
               onClick={onClickUpdatePost}
-
+              isLoading = {loading}
+              isDisabled = {inputPostTitle === '' ||inputPostDetails === '' }
             >
               {actionButtonName}
             </Button>
