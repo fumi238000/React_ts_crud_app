@@ -1,17 +1,17 @@
 import { useState, ChangeEvent,memo, VFC } from "react"
 import { Box, Flex, Heading, Divider, Button, Input, Stack } from "@chakra-ui/react"
 
-import { useUserLogin } from "../../../hooks/useUserLogin";
+import { useUserLogIn } from "../../../hooks/useUserLogIn";
 
 export const LoginPage: VFC = memo(() => {
   const [inputEmail, setinputEmail] = useState<string>('')
   const [inputPassword, setinputPassword] = useState<string>('')
   const onChangeInputEmail = (e: ChangeEvent<HTMLInputElement>) => setinputEmail(e.target.value);
   const onChangeInputUserPassword = (e: ChangeEvent<HTMLInputElement>) => setinputPassword(e.target.value);
-  const { login, loading } = useUserLogin();
+  const { logIn, loading } = useUserLogIn();
 
   const onClickLogin = () => {
-    login(inputEmail, inputPassword);
+    logIn(inputEmail, inputPassword);
   }
 
   return (
