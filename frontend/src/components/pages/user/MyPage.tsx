@@ -22,7 +22,7 @@ export const MyPage: VFC = memo(() => {
             マイページ
           </Heading>
 
-          <Heading>
+          <Heading size="sm" textAlign="center" py={4}>
             ログインID：{loginUser?.userId}
           </Heading>
 
