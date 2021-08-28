@@ -6,6 +6,7 @@ import { LoginPage } from "../components/pages/user/LoginPage";
 import { HeaderLayout } from "../components/templates/HeaderLayout";
 import { MyPage } from "../components/pages/user/MyPage";
 import { LoginUserProvider } from "../providers/LoginUserProvider";
+import { SignUpPage } from "../components/pages/user/SignUpPage";
 
 export const Router: VFC = memo(() => {
   return(
@@ -14,6 +15,11 @@ export const Router: VFC = memo(() => {
       <Route path="/login">
         <HeaderLayout>
           <LoginPage/>
+        </HeaderLayout>
+      </Route>
+      <Route path="/signup">
+        <HeaderLayout>
+          <SignUpPage />
         </HeaderLayout>
       </Route>
 
