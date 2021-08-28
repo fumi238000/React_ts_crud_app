@@ -13,7 +13,6 @@ export const Header: VFC = memo(() => {
   const onClickPostIndex = useCallback(() => history.push("/posts"),[history]);
   const onClickPostNew = useCallback(() => history.push("/posts/new"),[history]);
   const onClickMyPage = useCallback(() => history.push("/mypage"),[history]);
-  const onClickLogOut = () => alert("ログアウト");
   const { loginUser, userLoginStatus } = useContext(LoginUserContext);
 
   return (
@@ -43,11 +42,11 @@ export const Header: VFC = memo(() => {
           <Box pr={4}><Link onClick={onClickPostIndex}>投稿一覧</Link></Box>
           <Box pr={4}><Link onClick={onClickPostNew}>投稿新規作成</Link></Box>
           <Box pr={4}><Link onClick={onClickMyPage}>マイページ({loginUser?.userId}(Email))</Link></Box>
-          <Box><Link onClick={onClickLogOut}>ログアウト</Link></Box>
         </>
         :
         <>
           <Box pr={4}><Link onClick={onClickLoginPage}>ログイン画面</Link></Box>
+          {/* <Box pr={4}><Link onClick={onClickLoginPage}>新規作成</Link></Box> */}
           {/* <Box><Link onClick={onClickPostIndex}>投稿一覧</Link></Box> */}
         </>
        }
