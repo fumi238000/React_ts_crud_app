@@ -7,13 +7,13 @@ import { useMessage } from "./useMessage";
 import { LoginUserContext } from "../providers/LoginUserProvider";
 
 
-export const useUserLogin = () => {
+export const useUserLogIn = () => {
   const history = useHistory();
   const { showMessage } = useMessage();
   const [loading, setLoading] = useState(false);
   const { setLoginUser, setUserLoginStatus } = useContext(LoginUserContext);
 
-  const login = (email: string, password: string) => {
+  const logIn = (email: string, password: string) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     setLoading(true)
 
@@ -41,5 +41,5 @@ export const useUserLogin = () => {
       })
     };
     // todo: userIdも返せるようにしたい。
-    return { login, loading }
+    return { logIn, loading }
 };
