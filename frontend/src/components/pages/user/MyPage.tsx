@@ -14,6 +14,7 @@ export const MyPage: VFC = memo(() => {
   const onClickLogOut = () => logOut();
   const onClickUserEditPage = () => history.push("/user/edit");
   const onClickPasswordEditPage = () => history.push("/password");
+  const onClickUserDelete = () => alert("ユーザーを削除");
 
   return (
       <>
@@ -47,6 +48,9 @@ export const MyPage: VFC = memo(() => {
           </Box>
         </Box>
       </Flex>
+      <Box mt={4} p={4} align="center">
+        <Button w="xs" bg="red.400" color="white" onClick={onClickUserDelete}>このユーザーを削除</Button>
+      </Box>
       </>
     
   );
