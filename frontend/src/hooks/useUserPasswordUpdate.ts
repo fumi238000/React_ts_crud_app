@@ -36,7 +36,7 @@ export const useUserPasswordUpdate = () => {
         showMessage({title: "ユーザーのパスワードを更新しました", status: "success"})
         setUserLoginStatus(true)
         setLoading(false)
-        history.push("/posts");
+        history.push("/mypage");
       })
       .catch(error => {
         console.log(error);

@@ -13,6 +13,7 @@ export const MyPage: VFC = memo(() => {
   const { logOut } = useUserLogOut();
   const onClickLogOut = () => logOut();
   const onClickUserEditPage = () => history.push("/user/edit");
+  const onClickPasswordEditPage = () => history.push("/password");
 
   return (
       <>
@@ -37,6 +38,9 @@ export const MyPage: VFC = memo(() => {
           </Heading>
           <Box mt={4} pt={4} align="center">
             <Button w="xs" bg="green.400" color="white" onClick={onClickUserEditPage}>ユーザー編集</Button>
+          </Box>
+          <Box mt={4} pt={4} align="center">
+            <Button w="xs" bg="green.400" color="white" onClick={onClickPasswordEditPage}>パスワード編集</Button>
           </Box>
           <Box mt={4} p={4} align="center">
             <Button w="xs" bg="red.400" color="white" onClick={onClickLogOut}>ログアウト</Button>

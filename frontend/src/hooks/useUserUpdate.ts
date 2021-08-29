@@ -5,11 +5,13 @@ import { useContext, useState } from "react";
 import { UserUpdateUrl } from "../urls";
 import { useMessage } from "./useMessage";
 import { LoginUserContext } from "../providers/LoginUserProvider";
+import { useHistory } from "react-router-dom";
 
 export const useUserUpdate = () => {
   const { showMessage } = useMessage();
   const { loginUser,setLoginUser, setUserLoginStatus } = useContext(LoginUserContext);
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const userUpdate = (name:string, email: string) => {
     setLoading(true)
@@ -30,10 +32,11 @@ export const useUserUpdate = () => {
           accessToken: res.headers[`access-token`],
           client: res.headers["client"],
           uid: (res.headers[`uid`])
-        })
+      })
         showMessage({title: "ユーザー情報を更新しました", status: "success"})
         setUserLoginStatus(true)
         setLoading(false)
+        history.push("/mypage");
       })
       .catch(error => {
         console.log(error);

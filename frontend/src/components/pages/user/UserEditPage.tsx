@@ -1,37 +1,24 @@
 import { Flex, Box, Heading, Divider, Stack, Input, Button } from "@chakra-ui/react";
-import { ChangeEvent, memo, useContext, useEffect, useState, VFC } from "react"
-import { useHistory } from "react-router-dom";
-import { useUserPasswordUpdate } from "../../../hooks/useUserPasswordUpdate";
+import { ChangeEvent, memo, useState, VFC } from "react"
 import { useUserUpdate } from "../../../hooks/useUserUpdate";
-import { LoginUserContext } from "../../../providers/LoginUserProvider";
 import { GoBackButton } from "../../atms/button/GoBackButton";
 
 export const UserEditPage: VFC = memo(() => {
-  const { loginUser } = useContext(LoginUserContext);
+  const { userUpdate, loading } = useUserUpdate();
   //todo: 初期値をログインユーザーにしたい。
   // ここにログインユーザーの情報を取得するカスタムフックを追加するか？
 
   //name
   const [inputUserName, setInputUserName] = useState<string>("")
   const onChangeInputUserName = (e: ChangeEvent<HTMLInputElement>) => setInputUserName(e.target.value);
-  const history = useHistory();
 
   //email
   const onChangeInputEmail = (e: ChangeEvent<HTMLInputElement>) => setinputEmail(e.target.value);
   const [inputEmail, setinputEmail] = useState<string>('')
-  // const userEmail = loginUser?.email
-  // useEffect(() => { setinputEmail(inputEmail)},[])
-
-  //password
-  const [inputUserPassword, setInputUserPassword] = useState<string>('')
-  const onChangeInputUserPassword = (e: ChangeEvent<HTMLInputElement>) => setInputUserPassword(e.target.value);
-  const { userUpdate } = useUserUpdate();
 
   //更新ボタン
   const onClickUserUpdate = () =>  {
     userUpdate(inputUserName,inputEmail);
-    // userPasswordUpdate(inputUserPassword);
-    history.push("/posts");
   }
 
   return (
@@ -55,19 +42,13 @@ export const UserEditPage: VFC = memo(() => {
             value={inputEmail}
             onChange={onChangeInputEmail}
           />
-          <p>新しいパスワード</p>
-          <Input placeholder="パスワード"
-            type="password"
-            value={inputUserPassword}
-            onChange={onChangeInputUserPassword}
-          />
           <Button
             bg="blue.500"
             color="white"
             _hover={{ opacity: 0.7}}
             onClick= {onClickUserUpdate}
-            // isLoading = {loading}
-            // isDisabled = {inputUserName === '' || inputEmail === ''}
+            isLoading = {loading}
+            isDisabled = {inputUserName === '' || inputEmail === ''}
             >
             更新する
           </Button>
@@ -77,7 +58,3 @@ export const UserEditPage: VFC = memo(() => {
     </>
   );
 });
-
-function userPasswordUpdate(inputUserPassword: string) {
-  throw new Error("Function not implemented.");
-}

@@ -8,6 +8,7 @@ import { MyPage } from "../components/pages/user/MyPage";
 import { LoginUserProvider } from "../providers/LoginUserProvider";
 import { SignUpPage } from "../components/pages/user/SignUpPage";
 import { UserEditPage } from "../components/pages/user/UserEditPage";
+import { PasswordEditPage } from "../components/pages/user/PasswordEditPage";
 
 export const Router: VFC = memo(() => {
   return(
@@ -28,6 +29,12 @@ export const Router: VFC = memo(() => {
       <Route path="/user/edit">
         <HeaderLayout>
           <UserEditPage />
+        </HeaderLayout>
+      </Route>
+
+      <Route path="/password">
+        <HeaderLayout>
+          <PasswordEditPage />
         </HeaderLayout>
       </Route>
 
