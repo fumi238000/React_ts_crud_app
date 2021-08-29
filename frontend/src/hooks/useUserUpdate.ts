@@ -1,26 +1,29 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
 
-import { SignUpUrl } from "../urls";
+import { UserUpdateUrl } from "../urls";
 import { useMessage } from "./useMessage";
 import { LoginUserContext } from "../providers/LoginUserProvider";
+import { useHistory } from "react-router-dom";
 
-export const useUserSignUp = () => {
-  const history = useHistory();
+export const useUserUpdate = () => {
   const { showMessage } = useMessage();
-  const { setLoginUser, setUserLoginStatus } = useContext(LoginUserContext);
+  const { loginUser,setLoginUser, setUserLoginStatus } = useContext(LoginUserContext);
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
-  const signUp = (email: string, password: string) => {
+  const userUpdate = (name:string, email: string) => {
     setLoading(true)
 
-    axios.post(SignUpUrl,{
-      name: "テストユーザー",
-      email: email,
-      password: password
-    })
+    axios.put(UserUpdateUrl, { 
+        'name': name,
+        'email': email,
+        'uid': loginUser?.uid,
+        'access-token': loginUser?.accessToken,
+        'client': loginUser?.client,
+        'Content-Type': `application/json`,
+      })
       .then(res => {
         setLoginUser({
           userId: res.data[`data`][`id`],
@@ -30,16 +33,20 @@ export const useUserSignUp = () => {
           client: res.headers["client"],
           uid: (res.headers[`uid`])
       })
-        showMessage({title: "新しくユーザーを作成しました", status: "success"})
+        showMessage({title: "ユーザー情報を更新しました", status: "success"})
         setUserLoginStatus(true)
         setLoading(false)
-        history.push("/posts");
+        history.push("/mypage");
       })
       .catch(error => {
         console.log(error);
         setLoading(false)
-        showMessage({title: "作成に失敗しました。", status: "error"})
+        showMessage({title: "ユーザー情報の更新に失敗しました", status: "error"})
       })
     };
-    return { signUp, loading }
+    return { userUpdate, loading }
 };
+
+
+
+

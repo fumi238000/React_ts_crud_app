@@ -1,7 +1,9 @@
 import { createContext, ReactNode, useState, Dispatch, SetStateAction } from "react";
 
 type User = {
-  userId?: number;
+  userId: number;
+  name: string;
+  email: string;
   uid?: string;
   client?: string;
   accessToken?: string;
