@@ -17,12 +17,14 @@ export const useUserSignUp = () => {
     setLoading(true)
 
     axios.post(SignUpUrl,{
+      name: "テストユーザー",
       email: email,
       password: password
     })
       .then(res => {
         setLoginUser({
           userId: res.data[`data`][`id`],
+          name: res.data[`data`][`name`],
           email: res.data[`data`][`email`],
           accessToken: res.headers[`access-token`],
           client: res.headers["client"],

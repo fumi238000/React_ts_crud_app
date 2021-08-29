@@ -2,6 +2,7 @@ import { createContext, ReactNode, useState, Dispatch, SetStateAction } from "re
 
 type User = {
   userId: number;
+  name: string;
   email: string;
   uid?: string;
   client?: string;

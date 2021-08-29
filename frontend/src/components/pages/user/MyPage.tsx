@@ -32,6 +32,9 @@ export const MyPage: VFC = memo(() => {
           <Heading size="sm" textAlign="center" py={4}>
             Email：{loginUser?.email}
           </Heading>
+          <Heading size="sm" textAlign="center" py={4}>
+            ユーザーネーム：{loginUser?.name}
+          </Heading>
           <Box mt={4} pt={4} align="center">
             <Button w="xs" bg="green.400" color="white" onClick={onClickUserEditPage}>ユーザー編集</Button>
           </Box>

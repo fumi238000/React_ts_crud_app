@@ -1,29 +1,37 @@
 import { Flex, Box, Heading, Divider, Stack, Input, Button } from "@chakra-ui/react";
 import { ChangeEvent, memo, useContext, useEffect, useState, VFC } from "react"
+import { useHistory } from "react-router-dom";
 import { useUserPasswordUpdate } from "../../../hooks/useUserPasswordUpdate";
+import { useUserUpdate } from "../../../hooks/useUserUpdate";
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
 import { GoBackButton } from "../../atms/button/GoBackButton";
 
 export const UserEditPage: VFC = memo(() => {
-  // const [inputUserName, setInputUserName] = useState<string>('')
-  // const onChangeInputUserName = (e: ChangeEvent<HTMLInputElement>) => setInputUserName(e.target.value);
-  // const { signUp, loading } = useUserSignUp();
-  // const onClickUserUpdate = () =>  signUp(inputEmail, inputPassword);
-  // const [inputEmail, setinputEmail] = useState<string>("test@gmail.com")
-  // const onChangeInputEmail = (e: ChangeEvent<HTMLInputElement>) => setinputEmail(e.target.value);
+  const { loginUser } = useContext(LoginUserContext);
+  //todo: 初期値をログインユーザーにしたい。
+  // ここにログインユーザーの情報を取得するカスタムフックを追加するか？
 
+  //name
+  const [inputUserName, setInputUserName] = useState<string>("")
+  const onChangeInputUserName = (e: ChangeEvent<HTMLInputElement>) => setInputUserName(e.target.value);
+  const history = useHistory();
+
+  //email
+  const onChangeInputEmail = (e: ChangeEvent<HTMLInputElement>) => setinputEmail(e.target.value);
+  const [inputEmail, setinputEmail] = useState<string>('')
+  // const userEmail = loginUser?.email
+  // useEffect(() => { setinputEmail(inputEmail)},[])
+
+  //password
   const [inputUserPassword, setInputUserPassword] = useState<string>('')
   const onChangeInputUserPassword = (e: ChangeEvent<HTMLInputElement>) => setInputUserPassword(e.target.value);
-  // const { loginUser } = useContext(LoginUserContext);
-  const { userPasswordUpdate } = useUserPasswordUpdate();
+  const { userUpdate } = useUserUpdate();
 
-
-  // useEffect(() => {
-  //   setinputEmail(loginUser?.email);
-  // },[])
-
+  //更新ボタン
   const onClickUserUpdate = () =>  {
-    userPasswordUpdate(inputUserPassword)  
+    userUpdate(inputUserName,inputEmail);
+    // userPasswordUpdate(inputUserPassword);
+    history.push("/posts");
   }
 
   return (
@@ -35,19 +43,19 @@ export const UserEditPage: VFC = memo(() => {
         <Heading as="h1" size="lg" textAlign="center" py={4}>ユーザー編集</Heading>
         <Divider my={4}></Divider>
         <Stack spacing={4} py={4} px={6}>
-          {/* <p>ユーザーネーム</p>
+          <p>ユーザーネーム</p>
           <Input placeholder="UserName"
-            type="email"
+            type="text"
             value={inputUserName}
             onChange={onChangeInputUserName}
-          /> */}
-          {/* <p>Email</p>
+          />
+          <p>新しいEmail</p>
           <Input placeholder="Email"
             type="email"
             value={inputEmail}
             onChange={onChangeInputEmail}
-          /> */}
-          <p>パスワード</p>
+          />
+          <p>新しいパスワード</p>
           <Input placeholder="パスワード"
             type="password"
             value={inputUserPassword}
@@ -69,3 +77,7 @@ export const UserEditPage: VFC = memo(() => {
     </>
   );
 });
+
+function userPasswordUpdate(inputUserPassword: string) {
+  throw new Error("Function not implemented.");
+}
