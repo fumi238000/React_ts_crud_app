@@ -3,23 +3,27 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { SignUpUrl } from "../urls";
+import { UserPwUPdateUrl } from "../urls";
 import { useMessage } from "./useMessage";
 import { LoginUserContext } from "../providers/LoginUserProvider";
 
-export const useUserSignUp = () => {
+export const useUserPasswordUpdate = () => {
   const history = useHistory();
   const { showMessage } = useMessage();
-  const { setLoginUser, setUserLoginStatus } = useContext(LoginUserContext);
+  const { loginUser,setLoginUser, setUserLoginStatus } = useContext(LoginUserContext);
   const [loading, setLoading] = useState(false);
 
-  const signUp = (email: string, password: string) => {
+  const userPasswordUpdate = (password: string) => {
     setLoading(true)
 
-    axios.post(SignUpUrl,{
-      email: email,
-      password: password
-    })
+    axios.put(UserPwUPdateUrl, { 
+      password: password,
+      password_confirmation: password, 
+      'uid': loginUser?.uid,
+      'access-token': loginUser?.accessToken,
+      'client': loginUser?.client,
+      'Content-Type': 'application/json',
+      })
       .then(res => {
         setLoginUser({
           userId: res.data[`data`][`id`],
@@ -27,8 +31,8 @@ export const useUserSignUp = () => {
           accessToken: res.headers[`access-token`],
           client: res.headers["client"],
           uid: (res.headers[`uid`])
-      })
-        showMessage({title: "新しくユーザーを作成しました", status: "success"})
+        })
+        showMessage({title: "ユーザーのパスワードを更新しました", status: "success"})
         setUserLoginStatus(true)
         setLoading(false)
         history.push("/posts");
@@ -36,8 +40,8 @@ export const useUserSignUp = () => {
       .catch(error => {
         console.log(error);
         setLoading(false)
-        showMessage({title: "作成に失敗しました。", status: "error"})
+        showMessage({title: "ユーザーパスワードの更新に失敗しました。", status: "error"})
       })
     };
-    return { signUp, loading }
+    return { userPasswordUpdate, loading }
 };

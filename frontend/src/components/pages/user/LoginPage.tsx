@@ -16,7 +16,7 @@ export const LoginPage: VFC = memo(() => {
   }
 
   return (
-      <Flex align="center" justify="center" height="100vh">
+      <Flex align="center" justify="center" height="90vh">
       <Box bg="white" w="sm" p={4} borderRadius="md" shadow="md">
           <Heading as="h1" size="lg" textAlign="center" py={4}>ログイン</Heading>
           <Divider my={4}></Divider>
