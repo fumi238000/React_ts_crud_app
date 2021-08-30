@@ -26,7 +26,6 @@ export const usePostCreate =() => {
       })
     .then(res => {
       console.log(res);
-      // const { id } = res.data.id;
       showMessage({title: "投稿を作成しました", status: "success"})
       setLoading(false)
       history.push("/posts");
