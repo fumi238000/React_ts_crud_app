@@ -3,13 +3,12 @@ module V1
     before_action :set_post, only: %i[update destroy]
 
     def index
-      posts = Post.order(id: :desc)
-      render json: posts
+      posts = Post.order(id: :asc)
+      render json: posts, include: { user: [:name] }
     end
 
     def create
-      # TODO: ログインユーザーの値を参照するように修正
-      post = Post.new(post_params)
+      post = current_v1_user.posts.new(post_params)
 
       if post.save
         render json: post
@@ -37,8 +36,7 @@ module V1
     end
 
     def post_params
-      # TODO: ログインユーザーの値を参照するように修正
-      params.require(:post).permit(:title, :details, :user_id)
+      params.require(:post).permit(:title, :details)
     end
   end
 end

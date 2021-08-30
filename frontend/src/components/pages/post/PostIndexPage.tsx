@@ -21,9 +21,11 @@ export const PostIndexPage = () => {
         </Box>
         { posts.map((post) => (
           <PostCard
+             postUserId={post.user_id}
              postId={post.id}
              postTitle={post.title}
              postDetails={post.details}
+             postUserName={post.user.name}
           />
           ))}
       </>
