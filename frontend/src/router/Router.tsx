@@ -58,13 +58,15 @@ export const Router: VFC = memo(() => {
               </HeaderLayout>
             </Route>
           ))}
+
         </Switch>
       )}>
       </Route>
+
+      </LoginUserProvider>
       <Route path ="*">
         <Page404/>
       </Route>
-      </LoginUserProvider>
     </Switch>
   )
 });
