@@ -48,11 +48,11 @@ export const MyPage: VFC = memo(() => {
           <Box mt={4} p={4} align="center">
             <Button w="xs" bg="red.400" color="white" onClick={onClickLogOut}>ログアウト</Button>
           </Box>
+          <Box p={4} align="center">
+            <Button w="xs" bg="red.400" color="white" onClick={onClickUserDelete}>このユーザーを削除</Button>
+          </Box>
         </Box>
       </Flex>
-      <Box mt={4} p={4} align="center">
-        <Button w="xs" bg="red.400" color="white" onClick={onClickUserDelete}>このユーザーを削除</Button>
-      </Box>
       </>
     
   );
