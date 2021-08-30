@@ -7,10 +7,11 @@ type Props = {
   postId: number;
   postTitle: string;
   postDetails: string;
+  postUserName: string;
 };
 
 export const PostCard: VFC<Props> = memo((props) => {
-  const { postId, postTitle, postDetails } = props;
+  const { postId, postTitle, postDetails, postUserName } = props;
   const history = useHistory();
   const { deletePost } = usePostDelete();
 
@@ -32,6 +33,7 @@ export const PostCard: VFC<Props> = memo((props) => {
      <Flex align="center" justify="center" width="100%">
      <Box bg="white" w="4xl" p={4} m={4} borderRadius="md" shadow="md" >
       <Heading as="h3" size="md" textAlign="center" py={4}>{postTitle}</Heading>
+      <Heading as="h3" size="xs" textAlign="center" py={4}>投稿者：{postUserName}</Heading>
       <Divider my={4}></Divider>
       <Stack spacing={4} py={4} px={6}>
         <Heading size="sm" textAlign="left" px={10}>{postDetails}</Heading>

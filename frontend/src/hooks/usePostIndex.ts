@@ -2,20 +2,26 @@ import { useState } from 'react';
 import axios from 'axios';
 
 import { postsIndexUrl } from '../urls';
-import { TodoType } from '../types/api/post';
+
+type Posts = {
+  id: number;
+  title: string;
+  details: string;
+  user: { name: string }
+}
 
 export const usePostIndex = () => {
-  const [posts, setPosts] = useState<Array<TodoType>>([])
-
+  const [posts, setPosts] = useState<Array<Posts>>([])
   const getPosts = () => {
     axios
-      .get<Array<TodoType>>(postsIndexUrl)
+      .get(postsIndexUrl)
       .then(res => {
+        console.log(res.data)
         setPosts(res.data)
       })
-    .then(res => {
-    })
+      .catch(error => {
+        console.log(error);
+      })
   };
-
   return {getPosts,posts}
 };

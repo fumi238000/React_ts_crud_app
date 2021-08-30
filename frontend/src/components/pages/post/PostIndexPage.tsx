@@ -24,6 +24,7 @@ export const PostIndexPage = () => {
              postId={post.id}
              postTitle={post.title}
              postDetails={post.details}
+             postUserName={post.user.name}
           />
           ))}
       </>
