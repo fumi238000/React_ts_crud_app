@@ -5,15 +5,18 @@ import { Box, Button, Flex, Heading } from "@chakra-ui/react"
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
 import { useUserLogOut } from "../../../hooks/useUserLogOut";
 import { useHistory } from "react-router-dom";
+import { useUserDelete } from "../../../hooks/useUserDelete";
 
 export const MyPage: VFC = memo(() => {
   const history = useHistory();
 
   const { loginUser } = useContext(LoginUserContext);
   const { logOut } = useUserLogOut();
+  const { userDelete} = useUserDelete();
   const onClickLogOut = () => logOut();
   const onClickUserEditPage = () => history.push("/user/edit");
   const onClickPasswordEditPage = () => history.push("/password");
+  const onClickUserDelete = () => userDelete();
 
   return (
       <>
@@ -47,6 +50,9 @@ export const MyPage: VFC = memo(() => {
           </Box>
         </Box>
       </Flex>
+      <Box mt={4} p={4} align="center">
+        <Button w="xs" bg="red.400" color="white" onClick={onClickUserDelete}>このユーザーを削除</Button>
+      </Box>
       </>
     
   );
