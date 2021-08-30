@@ -9,6 +9,7 @@ import { LoginUserProvider } from "../providers/LoginUserProvider";
 import { SignUpPage } from "../components/pages/user/SignUpPage";
 import { UserEditPage } from "../components/pages/user/UserEditPage";
 import { PasswordEditPage } from "../components/pages/user/PasswordEditPage";
+import { Page404 } from "../components/pages/Page404";
 
 export const Router: VFC = memo(() => {
   return(
@@ -59,6 +60,9 @@ export const Router: VFC = memo(() => {
           ))}
         </Switch>
       )}>
+      </Route>
+      <Route path ="*">
+        <Page404/>
       </Route>
       </LoginUserProvider>
     </Switch>
