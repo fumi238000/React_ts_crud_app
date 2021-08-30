@@ -3,7 +3,7 @@ module V1
     before_action :set_post, only: %i[update destroy]
 
     def index
-      posts = Post.all
+      posts = Post.order(id: :asc)
       render json: posts, include: { user: [:name] }
     end
 
