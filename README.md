@@ -14,10 +14,6 @@
 - CRUD
 - ログイン機能(devise token auth)
 
-## 挑戦すること
-- CircleCIの実装
-- AWSへのデプロイ
-- タスク実装準備の徹底
 
 # 資料
 ## ER図
