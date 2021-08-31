@@ -13,10 +13,10 @@ export const PostRoutes = [
     exact: false,
     children: <PostCreatePage/>
   },
+  //todo: 正常値を渡さない場合のエラー対応を実装する
   {
     path: "/:postId",
     exact: false,
     children: <PostEditPage/>
   },
-  
 ];
