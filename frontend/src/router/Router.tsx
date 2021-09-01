@@ -3,7 +3,6 @@ import { Route, Switch } from "react-router-dom";
 
 import { PostRoutes } from "./PostRoutes";
 import { LoginPage } from "../components/pages/user/LoginPage";
-import { HeaderLayout } from "../components/templates/HeaderLayout";
 import { MyPage } from "../components/pages/user/MyPage";
 import { LoginUserProvider } from "../providers/LoginUserProvider";
 import { SignUpPage } from "../components/pages/user/SignUpPage";
@@ -15,57 +14,45 @@ export const Router: VFC = memo(() => {
   return(
     <LoginUserProvider>
       <Switch>
+        <Route
+            path="/posts"render = {({ match: { url }}) => (
+            <Switch>
+              {PostRoutes.map((route) => (
+                <Route
+                  key={route.path}
+                  exact={route.exact}
+                  path={`${url}${route.path}`}>
+                    { route.children }
+                </Route>
+              ))}
+            </Switch>
+          )}>
+        </Route>
+
         <Route path="/login">
-          <HeaderLayout>
-            <LoginPage/>
-          </HeaderLayout>
+          <LoginPage/>
         </Route>
   
         <Route path="/signup">
-          <HeaderLayout>
-            <SignUpPage />
-          </HeaderLayout>
+          <SignUpPage />
         </Route>
   
         <Route path="/user/edit">
-          <HeaderLayout>
-            <UserEditPage />
-          </HeaderLayout>
+          <UserEditPage />
         </Route>
   
         <Route path="/password">
-          <HeaderLayout>
-            <PasswordEditPage />
-          </HeaderLayout>
+          <PasswordEditPage />
         </Route>
   
         <Route path="/mypage">
-          <HeaderLayout>
-            <MyPage/>
-          </HeaderLayout>
+          <MyPage/>
         </Route>
-  
-        <Route 
-          path="/posts"render = {({ match: { url }}) => (
-          <Switch>
-            {PostRoutes.map((route) => (
-              <Route
-                key={route.path}
-                exact={route.exact}
-                path={`${url}${route.path}`}>
-                <HeaderLayout>
-                  { route.children }
-                </HeaderLayout>
-              </Route>
-            ))}
-  
-          </Switch>
-        )}>
-        </Route>
-  
+
         <Route path ="*">
           <Page404 />
         </Route>
+
       </Switch>
     </LoginUserProvider>
   )

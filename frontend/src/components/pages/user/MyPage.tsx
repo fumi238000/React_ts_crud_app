@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useContext, memo, VFC } from "react"
-import { Box, Button, Flex, Heading } from "@chakra-ui/react"
+import { Box, Flex, Heading } from "@chakra-ui/react"
 
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
 import { useUserLogOut } from "../../../hooks/useUserLogOut";
 import { useHistory } from "react-router-dom";
 import { useUserDelete } from "../../../hooks/useUserDelete";
+import { GreenButton } from "../../atms/button/GreenButton";
+import { RedButton } from "../../atms/button/RedButton";
 
 export const MyPage: VFC = memo(() => {
   const history = useHistory();
@@ -39,18 +41,11 @@ export const MyPage: VFC = memo(() => {
           <Heading size="sm" textAlign="center" py={4}>
             ユーザーネーム：{loginUser?.name}
           </Heading>
-          <Box mt={4} pt={4} align="center">
-            <Button w="xs" bg="green.400" color="white" onClick={onClickUserEditPage}>ユーザー編集</Button>
-          </Box>
-          <Box mt={4} pt={4} align="center">
-            <Button w="xs" bg="green.400" color="white" onClick={onClickPasswordEditPage}>パスワード編集</Button>
-          </Box>
-          <Box mt={4} p={4} align="center">
-            <Button w="xs" bg="red.400" color="white" onClick={onClickLogOut}>ログアウト</Button>
-          </Box>
-          <Box p={4} align="center">
-            <Button w="xs" bg="red.400" color="white" onClick={onClickUserDelete}>このユーザーを削除</Button>
-          </Box>
+
+          <GreenButton onClick={onClickUserEditPage} >ユーザー編集</GreenButton>
+          <GreenButton onClick={onClickPasswordEditPage} >パスワード編集</GreenButton>
+          <RedButton onClick={onClickLogOut}>ログアウト</RedButton>
+          <RedButton onClick={onClickUserDelete}>このユーザーを削除</RedButton>
         </Box>
       </Flex>
       </>

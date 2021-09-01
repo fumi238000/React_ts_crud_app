@@ -1,7 +1,8 @@
-import { Flex, Box, Heading, Divider, Stack, Input, Button } from "@chakra-ui/react";
+import { Flex, Box, Heading, Divider, Stack, Input } from "@chakra-ui/react";
 import { ChangeEvent, memo, useState, VFC } from "react"
 import { Link } from "react-router-dom";
 import { useUserSignUp } from "../../../hooks/useUserSignUp";
+import { BlueButton } from "../../atms/button/LoginButton";
 
 export const SignUpPage: VFC = memo(() => {
   const [inputEmail, setinputEmail] = useState<string>('')
@@ -29,16 +30,14 @@ export const SignUpPage: VFC = memo(() => {
             value={inputPassword}
             onChange={onChangeInputUserPassword}
           />
-          <Button
-            bg="blue.500"
-            color="white"
-            _hover={{ opacity: 0.7}}
+          <BlueButton
             onClick= {onClickSignUp}
-            isLoading = {loading}
-            isDisabled = {inputPassword === '' || inputPassword === ''}
+            loading = {loading}
+            inputEmail={inputEmail}
+            inputPassword={inputPassword}
             >
             新規作成
-          </Button>
+          </BlueButton>
           <Box  pt={4} align="center">
             <Link to="/login">ログインする</Link>
           </Box>

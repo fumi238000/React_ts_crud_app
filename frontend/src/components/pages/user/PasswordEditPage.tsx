@@ -31,7 +31,6 @@ export const PasswordEditPage: VFC = memo(() => {
           <Button
             bg="blue.500"
             color="white"
-            _hover={{ opacity: 0.7}}
             onClick= {onClickPasswordUpdate}
             isLoading = {loading}
             isDisabled = {inputUserPassword === ''}
