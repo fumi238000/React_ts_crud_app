@@ -25,7 +25,6 @@ export const UserEditPage: VFC = memo(() => {
     <>
     <GoBackButton/>
     <Flex align="center" justify="center" height="50vh">
-
       <Box bg="white" w="sm" p={4} borderRadius="md" shadow="md">
         <Heading as="h1" size="lg" textAlign="center" py={4}>ユーザー編集</Heading>
         <Divider my={4}></Divider>
@@ -45,7 +44,6 @@ export const UserEditPage: VFC = memo(() => {
           <Button
             bg="blue.500"
             color="white"
-            _hover={{ opacity: 0.7}}
             onClick= {onClickUserUpdate}
             isLoading = {loading}
             isDisabled = {inputUserName === '' || inputEmail === ''}
