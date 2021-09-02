@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useCallback } from "react";
 import { Button, Box, Heading } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
@@ -6,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { PostCard } from "../../organisms/post/PostCard";
 import { usePostIndex } from "../../../hooks/usePostIndex";
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const PostIndexPage = () => {
   const history = useHistory();
   const onClickPostCreatePage = useCallback(
@@ -15,6 +15,7 @@ export const PostIndexPage = () => {
   const { getPosts, posts } = usePostIndex();
   // todo: postsを持っていない場合のみ取得する
   useEffect(() => getPosts(), []);
+  console.log(posts)
 
   return (
     <>
@@ -27,6 +28,7 @@ export const PostIndexPage = () => {
         </Button>
       </Box>
       {posts.map((post) => (
+        // eslint-disable-next-line react/jsx-key
         <PostCard
           postUserId={post.user_id}
           postId={post.id}
