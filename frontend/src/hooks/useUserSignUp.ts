@@ -14,32 +14,36 @@ export const useUserSignUp = () => {
   const [loading, setLoading] = useState(false);
 
   const signUp = (email: string, password: string) => {
-    setLoading(true)
+    setLoading(true);
 
-    axios.post(SignUpUrl,{
-      name: "テストユーザー",
-      email: email,
-      password: password
-    })
-      .then(res => {
+    axios
+      .post(SignUpUrl, {
+        name: "テストユーザー",
+        email: email,
+        password: password,
+      })
+      .then((res) => {
         setLoginUser({
           userId: res.data[`data`][`id`],
           name: res.data[`data`][`name`],
           email: res.data[`data`][`email`],
           accessToken: res.headers[`access-token`],
           client: res.headers["client"],
-          uid: (res.headers[`uid`])
-      })
-        showMessage({title: "新しくユーザーを作成しました", status: "success"})
-        setUserLoginStatus(true)
-        setLoading(false)
+          uid: res.headers[`uid`],
+        });
+        showMessage({
+          title: "新しくユーザーを作成しました",
+          status: "success",
+        });
+        setUserLoginStatus(true);
+        setLoading(false);
         history.push("/posts");
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
-        setLoading(false)
-        showMessage({title: "作成に失敗しました。", status: "error"})
-      })
-    };
-    return { signUp, loading }
+        setLoading(false);
+        showMessage({ title: "作成に失敗しました。", status: "error" });
+      });
+  };
+  return { signUp, loading };
 };

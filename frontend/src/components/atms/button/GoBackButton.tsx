@@ -1,5 +1,5 @@
 import { memo, VFC } from "react";
-import {Button, Box } from "@chakra-ui/react";
+import { Button, Box } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 
 export const GoBackButton: VFC = memo(() => {
@@ -7,8 +7,10 @@ export const GoBackButton: VFC = memo(() => {
   const onClickBack = () => history.goBack();
 
   return (
-  <Box textAlign="left" px={4} py={8} m={4}>
-    <Button colorScheme="blue" onClick={onClickBack}>戻る</Button>
-  </Box>
-  )
+    <Box textAlign="left" px={4} py={8} m={4}>
+      <Button colorScheme="blue" onClick={onClickBack}>
+        戻る
+      </Button>
+    </Box>
+  );
 });

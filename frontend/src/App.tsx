@@ -1,10 +1,10 @@
-import { Box, ChakraProvider } from '@chakra-ui/react';
-import theme from './theme/theme';
+import { Box, ChakraProvider } from "@chakra-ui/react";
+import theme from "./theme/theme";
 
-import { BrowserRouter } from 'react-router-dom';
-import { Router } from './router/Router';
-import './App.css';
-import { HeaderLayout } from './components/templates/HeaderLayout';
+import { BrowserRouter } from "react-router-dom";
+import { Router } from "./router/Router";
+import "./App.css";
+import { HeaderLayout } from "./components/templates/HeaderLayout";
 
 function App() {
   return (

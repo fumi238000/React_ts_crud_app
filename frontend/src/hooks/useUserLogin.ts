@@ -13,33 +13,34 @@ export const useUserLogIn = () => {
   const { setLoginUser, setUserLoginStatus } = useContext(LoginUserContext);
 
   const logIn = (email: string, password: string) => {
-    setLoading(true)
+    setLoading(true);
 
-    axios.post(logInUrl,{
-      email: email,
-      password: password
-    })
-      .then(res => {
+    axios
+      .post(logInUrl, {
+        email: email,
+        password: password,
+      })
+      .then((res) => {
         setLoginUser({
           userId: res.data[`data`][`id`],
           name: res.data[`data`][`name`],
           email: res.data[`data`][`email`],
           accessToken: res.headers[`access-token`],
           client: res.headers["client"],
-          uid: (res.headers[`uid`])
-      })
+          uid: res.headers[`uid`],
+        });
 
-        showMessage({title: "ログインしました", status: "success"})
-        setLoading(false)
-        setUserLoginStatus(true)
+        showMessage({ title: "ログインしました", status: "success" });
+        setLoading(false);
+        setUserLoginStatus(true);
         history.push("/posts");
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
-        showMessage({title: "ログインにできませんでした", status: "error"})
-        setLoading(false)
-      })
-    };
-    // todo: userIdも返せるようにしたい。
-    return { logIn, loading }
+        showMessage({ title: "ログインにできませんでした", status: "error" });
+        setLoading(false);
+      });
+  };
+  // todo: userIdも返せるようにしたい。
+  return { logIn, loading };
 };
