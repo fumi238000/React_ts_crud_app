@@ -1,25 +1,25 @@
-import { ReactNode,memo, VFC } from "react";
+import { ReactNode, memo, VFC } from "react";
 import { Button } from "@chakra-ui/react";
 
 type Props = {
   children: ReactNode;
-  onClick: ()=> void;
+  onClick: () => void;
   loading: boolean;
-  inputPassword: string
+  inputPassword: string;
   inputEmail: string;
 };
 
 export const BlueButton: VFC<Props> = memo((props) => {
-  const {children, onClick, loading, inputPassword, inputEmail} = props;
+  const { children, onClick, loading, inputPassword, inputEmail } = props;
   return (
     <Button
       bg="blue.500"
       color="white"
       onClick={onClick}
-      isLoading = {loading}
-      isDisabled = {inputEmail === '' || inputPassword === ''}
+      isLoading={loading}
+      isDisabled={inputEmail === "" || inputPassword === ""}
     >
       {children}
     </Button>
-  )
+  );
 });

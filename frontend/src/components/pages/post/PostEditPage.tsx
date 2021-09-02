@@ -1,13 +1,13 @@
 import { memo } from "react";
-import { PostForm } from '../../molecules/PostForm';
-import { GoBackButton } from '../../atms/button/GoBackButton';
+import { PostForm } from "../../molecules/PostForm";
+import { GoBackButton } from "../../atms/button/GoBackButton";
 import { useLocation, useParams } from "react-router-dom";
 
 type Props = {
   postId?: number;
   postTitle: string;
   postDetails: string;
-}
+};
 
 export const PostEditPage = memo(() => {
   const { state } = useLocation<Props>();
@@ -15,14 +15,14 @@ export const PostEditPage = memo(() => {
 
   return (
     <>
-      <GoBackButton/>
+      <GoBackButton />
       <PostForm
-        postId = { postId }
-        postTitle = {state.postTitle}
-        postDetails = {state.postDetails}
-        actionName = {"編集"}
-        actionButtonName = {"更新する"}
+        postId={postId}
+        postTitle={state.postTitle}
+        postDetails={state.postDetails}
+        actionName={"編集"}
+        actionButtonName={"更新する"}
       />
     </>
-  )
+  );
 });

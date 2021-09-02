@@ -11,49 +11,50 @@ import { PasswordEditPage } from "../components/pages/user/PasswordEditPage";
 import { Page404 } from "../components/pages/Page404";
 
 export const Router: VFC = memo(() => {
-  return(
+  return (
     <LoginUserProvider>
       <Switch>
         <Route
-            path="/posts"render = {({ match: { url }}) => (
+          path="/posts"
+          render={({ match: { url } }) => (
             <Switch>
               {PostRoutes.map((route) => (
                 <Route
                   key={route.path}
                   exact={route.exact}
-                  path={`${url}${route.path}`}>
-                    { route.children }
+                  path={`${url}${route.path}`}
+                >
+                  {route.children}
                 </Route>
               ))}
             </Switch>
-          )}>
-        </Route>
+          )}
+        ></Route>
 
         <Route path="/login">
-          <LoginPage/>
+          <LoginPage />
         </Route>
-  
+
         <Route path="/signup">
           <SignUpPage />
         </Route>
-  
+
         <Route path="/user/edit">
           <UserEditPage />
         </Route>
-  
+
         <Route path="/password">
           <PasswordEditPage />
         </Route>
-  
+
         <Route path="/mypage">
-          <MyPage/>
+          <MyPage />
         </Route>
 
-        <Route path ="*">
+        <Route path="*">
           <Page404 />
         </Route>
-
       </Switch>
     </LoginUserProvider>
-  )
+  );
 });

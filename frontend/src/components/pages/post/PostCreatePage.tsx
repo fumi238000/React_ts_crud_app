@@ -1,11 +1,11 @@
 import { memo, VFC } from "react";
-import { PostForm } from '../../molecules/PostForm';
-import { GoBackButton } from '../../atms/button/GoBackButton';
+import { PostForm } from "../../molecules/PostForm";
+import { GoBackButton } from "../../atms/button/GoBackButton";
 
 export const PostCreatePage: VFC = memo(() => {
   return (
     <>
-      <GoBackButton/>
+      <GoBackButton />
       <PostForm
         actionName={"新規作成"}
         postTitle={""}
@@ -13,5 +13,5 @@ export const PostCreatePage: VFC = memo(() => {
         actionButtonName={"作成する"}
       />
     </>
-  )
+  );
 });

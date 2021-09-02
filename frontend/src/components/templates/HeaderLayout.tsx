@@ -2,15 +2,15 @@ import { ReactNode, memo, VFC } from "react";
 
 import { Header } from "../organisms/layouts/Header";
 
-type Props ={
+type Props = {
   children: ReactNode;
-}
+};
 
 export const HeaderLayout: VFC<Props> = memo((props) => {
   const { children } = props;
   return (
     <>
-      <Header/>
+      <Header />
       {children}
     </>
   );

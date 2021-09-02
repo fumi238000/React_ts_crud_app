@@ -10,30 +10,33 @@ export const useUserDelete = () => {
   const history = useHistory();
   const { showMessage } = useMessage();
   const [loading, setLoading] = useState(false);
-  const { loginUser, setLoginUser, setUserLoginStatus } = useContext(LoginUserContext);
+  const { loginUser, setLoginUser, setUserLoginStatus } =
+    useContext(LoginUserContext);
 
   const userDelete = () => {
-    setLoading(true)
+    setLoading(true);
 
     axios
-    .delete(UserDeleteUrl, { headers: {
-      'uid': loginUser?.uid,
-      'access-token': loginUser?.accessToken,
-      'client': loginUser?.client,
-      }})
-      .then(res => {
-        console.log(res)
-        setLoginUser(null)
-        showMessage({title: "ユーザーを削除しました", status: "error"})
-        setLoading(false)
-        setUserLoginStatus(false)
+      .delete(UserDeleteUrl, {
+        headers: {
+          uid: loginUser?.uid,
+          "access-token": loginUser?.accessToken,
+          client: loginUser?.client,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setLoginUser(null);
+        showMessage({ title: "ユーザーを削除しました", status: "error" });
+        setLoading(false);
+        setUserLoginStatus(false);
         history.push("/login");
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
-        showMessage({title: "削除できませんでした", status: "error"})
-        setLoading(false)
-      })
-    };
-    return { userDelete, loading }
+        showMessage({ title: "削除できませんでした", status: "error" });
+        setLoading(false);
+      });
+  };
+  return { userDelete, loading };
 };

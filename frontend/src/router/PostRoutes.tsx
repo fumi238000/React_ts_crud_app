@@ -6,17 +6,17 @@ export const PostRoutes = [
   {
     path: "/",
     exact: true,
-    children: <PostIndexPage/>
+    children: <PostIndexPage />,
   },
   {
     path: "/new",
     exact: false,
-    children: <PostCreatePage/>
+    children: <PostCreatePage />,
   },
   //todo: 正常値を渡さない場合のエラー対応を実装する
   {
     path: "/:postId",
     exact: false,
-    children: <PostEditPage/>
+    children: <PostEditPage />,
   },
 ];
