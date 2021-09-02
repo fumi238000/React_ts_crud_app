@@ -1,6 +1,6 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:3001"
+    origins "http://localhost:3001", "https://react-todo-2021-9-2.herokuapp.com/api"
 
     resource "*",
              headers: :any,
