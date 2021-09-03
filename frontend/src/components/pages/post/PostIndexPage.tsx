@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, memo } from "react";
 import { Button, Box, Heading } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 
@@ -6,7 +6,7 @@ import { PostCard } from "../../organisms/post/PostCard";
 import { usePostIndex } from "../../../hooks/usePostIndex";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const PostIndexPage = () => {
+export const PostIndexPage = memo(() => {
   const history = useHistory();
   const onClickPostCreatePage = useCallback(
     () => history.push("/posts/new"),
@@ -39,4 +39,4 @@ export const PostIndexPage = () => {
       ))}
     </>
   );
-};
+});

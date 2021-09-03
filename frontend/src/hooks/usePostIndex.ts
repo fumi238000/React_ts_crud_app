@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 
 import { postsIndexUrl } from "../urls";
@@ -13,7 +13,7 @@ type Posts = {
 
 export const usePostIndex = () => {
   const [posts, setPosts] = useState<Array<Posts>>([]);
-  const getPosts = () => {
+  const getPosts = useCallback(() => {
     axios
       .get(postsIndexUrl)
       .then((res) => {
@@ -23,6 +23,6 @@ export const usePostIndex = () => {
       .catch((error) => {
         console.log(error);
       });
-  };
+  },[]);
   return { getPosts, posts };
 };

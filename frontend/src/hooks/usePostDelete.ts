@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useCallback } from "react";
 
 import { postsDeleteUrl } from "../urls";
 import { useMessage } from "./useMessage";
@@ -6,7 +7,7 @@ import { useMessage } from "./useMessage";
 export const usePostDelete = () => {
   const { showMessage } = useMessage();
 
-  const deletePost = (postId: number) => {
+  const deletePost = useCallback((postId: number) => {
     axios
       .delete(postsDeleteUrl(postId))
       .then((res) => {
@@ -17,7 +18,7 @@ export const usePostDelete = () => {
         console.log(error);
         showMessage({ title: "投稿を削除できませんでした", status: "success" });
       });
-  };
+  },[]);
   //todo: 削除したidを渡して、それを削除する記述を書きたい
   return { deletePost };
 };

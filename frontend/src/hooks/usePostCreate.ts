@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useCallback } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -12,7 +12,7 @@ export const usePostCreate = () => {
   const [loading, setLoading] = useState(false);
   const { loginUser } = useContext(LoginUserContext);
 
-  const createPost = (postTitle: string, postDetails: string) => {
+  const createPost = useCallback((postTitle: string, postDetails: string) => {
     setLoading(true);
 
     axios
@@ -35,7 +35,7 @@ export const usePostCreate = () => {
         setLoading(false);
         showMessage({ title: "作成に失敗しました", status: "error" });
       });
-  };
+  },[]);
 
   //TODO: ここで作成したPostのidを返して、無駄なAPI通信を省きたい
   return { createPost, loading };

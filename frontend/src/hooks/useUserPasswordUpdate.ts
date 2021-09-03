@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { UserPwUPdateUrl } from "../urls";
@@ -14,7 +14,7 @@ export const useUserPasswordUpdate = () => {
     useContext(LoginUserContext);
   const [loading, setLoading] = useState(false);
 
-  const userPasswordUpdate = (password: string) => {
+  const userPasswordUpdate = useCallback((password: string) => {
     setLoading(true);
 
     axios
@@ -51,6 +51,6 @@ export const useUserPasswordUpdate = () => {
           status: "error",
         });
       });
-  };
+  },[]);
   return { userPasswordUpdate, loading };
 };

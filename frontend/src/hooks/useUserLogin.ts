@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useState, useContext, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 
 import { logInUrl } from "../urls";
@@ -12,7 +12,7 @@ export const useUserLogIn = () => {
   const [loading, setLoading] = useState(false);
   const { setLoginUser, setUserLoginStatus } = useContext(LoginUserContext);
 
-  const logIn = (email: string, password: string) => {
+  const logIn = useCallback((email: string, password: string) => {
     setLoading(true);
 
     axios
@@ -40,7 +40,7 @@ export const useUserLogIn = () => {
         showMessage({ title: "ログインにできませんでした", status: "error" });
         setLoading(false);
       });
-  };
+  },[]);
   // todo: userIdも返せるようにしたい。
   return { logIn, loading };
 };

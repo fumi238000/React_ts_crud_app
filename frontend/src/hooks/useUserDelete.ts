@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useState, useContext, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 
 import { UserDeleteUrl } from "../urls";
@@ -13,7 +13,7 @@ export const useUserDelete = () => {
   const { loginUser, setLoginUser, setUserLoginStatus } =
     useContext(LoginUserContext);
 
-  const userDelete = () => {
+  const userDelete = useCallback(() => {
     setLoading(true);
 
     axios
@@ -37,6 +37,6 @@ export const useUserDelete = () => {
         showMessage({ title: "削除できませんでした", status: "error" });
         setLoading(false);
       });
-  };
+  },[]);
   return { userDelete, loading };
 };

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { LoginUserContext } from "../providers/LoginUserProvider";
 
@@ -12,7 +12,7 @@ export const usePostUpdate = () => {
   const [loading, setLoading] = useState(false);
   const { loginUser } = useContext(LoginUserContext);
 
-  const updatePost = (
+  const updatePost = useCallback((
     postId: number,
     postTitle: string,
     postDetals: string
@@ -38,6 +38,6 @@ export const usePostUpdate = () => {
         setLoading(false);
         showMessage({ title: "更新に失敗しました", status: "error" });
       });
-  };
+  },[]);
   return { updatePost, loading };
 };

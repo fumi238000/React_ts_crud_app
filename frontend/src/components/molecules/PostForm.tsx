@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, memo, VFC } from "react";
+import { useState, useEffect, ChangeEvent, memo, VFC, useCallback } from "react";
 import {
   Box,
   Button,
@@ -24,10 +24,10 @@ export const PostForm: VFC<Props> = memo((props) => {
     props;
   const [inputPostTitle, setInputPostTitle] = useState("");
   const [inputPostDetails, setInputPostDetails] = useState("");
-  const onChangeInputPostTitle = (e: ChangeEvent<HTMLInputElement>) =>
-    setInputPostTitle(e.target.value);
-  const onChangeInputPostDetails = (e: ChangeEvent<HTMLInputElement>) =>
-    setInputPostDetails(e.target.value);
+  const onChangeInputPostTitle = useCallback((e: ChangeEvent<HTMLInputElement>) =>
+    setInputPostTitle(e.target.value),[]);
+  const onChangeInputPostDetails = useCallback((e: ChangeEvent<HTMLInputElement>) =>
+    setInputPostDetails(e.target.value),[]);
   const { createPost, loading } = usePostCreate();
   const { updatePost } = usePostUpdate();
 
@@ -36,13 +36,13 @@ export const PostForm: VFC<Props> = memo((props) => {
     setInputPostDetails(postDetails);
   }, [postTitle, postDetails]);
 
-  const onClickCreatePost = () => {
+  const onClickCreatePost = useCallback(() => {
     createPost(inputPostTitle, inputPostDetails);
-  };
+  },[]);
 
-  const onClickUpdatePost = () => {
+  const onClickUpdatePost = useCallback(() => {
     updatePost(postId, inputPostTitle, inputPostDetails);
-  };
+  },[]);
 
   return (
     <Flex align="center" justify="center" height="50vh">
