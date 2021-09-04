@@ -9,15 +9,14 @@ import { LoginUserContext } from "../providers/LoginUserProvider";
 export const usePostCreate = () => {
   const history = useHistory();
   const { showMessage } = useMessage();
-  const [loading, setLoading] = useState(false);
+  const [createLoading, setCreateLoading] = useState(false);
   const { loginUser } = useContext(LoginUserContext);
 
   const createPost = useCallback((postTitle: string, postDetails: string) => {
-    setLoading(true);
+    setCreateLoading(true);
 
     axios
       .post(postsCreateUrl, {
-        user_id: 1,
         title: postTitle,
         details: postDetails,
         uid: loginUser?.uid,
@@ -27,16 +26,16 @@ export const usePostCreate = () => {
       .then((res) => {
         console.log(res);
         showMessage({ title: "投稿を作成しました", status: "success" });
-        setLoading(false);
+        setCreateLoading(false);
         history.push("/posts");
       })
       .catch((error) => {
         console.log(error);
-        setLoading(false);
+        setCreateLoading(false);
         showMessage({ title: "作成に失敗しました", status: "error" });
       });
-  },[]);
+  }, []);
 
   //TODO: ここで作成したPostのidを返して、無駄なAPI通信を省きたい
-  return { createPost, loading };
+  return { createPost, createLoading };
 };
