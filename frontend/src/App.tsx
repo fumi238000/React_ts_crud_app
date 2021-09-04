@@ -5,18 +5,22 @@ import { BrowserRouter } from "react-router-dom";
 import { Router } from "./router/Router";
 import "./App.css";
 import { HeaderLayout } from "./components/templates/HeaderLayout";
+import { LoginUserProvider } from "./providers/LoginUserProvider";
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function App() {
   return (
-    <ChakraProvider theme={theme}>
-      <BrowserRouter>
-        <HeaderLayout>
-          <Box m={16}>
-            <Router />
-          </Box>
-        </HeaderLayout>
-      </BrowserRouter>
-    </ChakraProvider>
+    <LoginUserProvider>
+      <ChakraProvider theme={theme}>
+        <BrowserRouter>
+          <HeaderLayout>
+            <Box m={16}>
+              <Router />
+            </Box>
+          </HeaderLayout>
+        </BrowserRouter>
+      </ChakraProvider>
+    </LoginUserProvider>
   );
 }
 export default App;

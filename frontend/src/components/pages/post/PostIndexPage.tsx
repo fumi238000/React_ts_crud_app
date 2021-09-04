@@ -30,6 +30,7 @@ export const PostIndexPage = memo(() => {
       {posts.map((post) => (
         // eslint-disable-next-line react/jsx-key
         <PostCard
+          key={post.id}
           postUserId={post.user_id}
           postId={post.id}
           postTitle={post.title}
