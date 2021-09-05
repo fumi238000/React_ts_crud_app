@@ -25,17 +25,16 @@ export const usePostCreate = () => {
       })
       .then((res) => {
         console.log(res);
-        showMessage({ title: "投稿を作成しました", status: "success" });
         setCreateLoading(false);
+        showMessage({ title: "投稿を作成しました", status: "success" });
         history.push("/posts");
       })
       .catch((error) => {
         console.log(error);
         setCreateLoading(false);
-        showMessage({ title: "作成に失敗しました", status: "error" });
+        showMessage({ title: `${error.response.data}`, status: "error" });
       });
   }, []);
 
-  //TODO: ここで作成したPostのidを返して、無駄なAPI通信を省きたい
   return { createPost, createLoading };
 };

@@ -33,7 +33,7 @@ export const usePostUpdate = () => {
         .catch((error) => {
           console.log(error);
           setupdateLoading(false);
-          showMessage({ title: "更新に失敗しました", status: "error" });
+          showMessage({ title: `${error.response.data}`, status: "error" });
         });
     },
     []
