@@ -61,7 +61,7 @@ export const Router: VFC = memo(() => {
       )}
 
       {!userLoginStatus && (
-        <Route path="/login">
+        <Route path="*">
           <LoginPage />
         </Route>
       )}
