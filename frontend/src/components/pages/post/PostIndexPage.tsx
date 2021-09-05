@@ -15,7 +15,6 @@ export const PostIndexPage = memo(() => {
   const { getPosts, posts } = usePostIndex();
   // todo: postsを持っていない場合のみ取得する
   useEffect(() => getPosts(), []);
-  console.log(posts)
 
   return (
     <>

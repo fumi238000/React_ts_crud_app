@@ -37,6 +37,6 @@ export const useUserDelete = () => {
         showMessage({ title: "削除できませんでした", status: "error" });
         setLoading(false);
       });
-  },[]);
+  }, []);
   return { userDelete, loading };
 };

@@ -31,6 +31,6 @@ export const useUserLogOut = () => {
         console.log(error);
         showMessage({ title: "ログアウトできませんでした", status: "error" });
       });
-  },[]);
+  }, []);
   return { logOut };
 };

@@ -51,6 +51,6 @@ export const useUserPasswordUpdate = () => {
           status: "error",
         });
       });
-  },[]);
+  }, []);
   return { userPasswordUpdate, loading };
 };

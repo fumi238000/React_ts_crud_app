@@ -23,6 +23,6 @@ export const usePostIndex = () => {
       .catch((error) => {
         console.log(error);
       });
-  },[]);
+  }, []);
   return { getPosts, posts };
 };

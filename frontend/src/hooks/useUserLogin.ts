@@ -40,7 +40,7 @@ export const useUserLogIn = () => {
         showMessage({ title: "ログインにできませんでした", status: "error" });
         setLoading(false);
       });
-  },[]);
+  }, []);
   // todo: userIdも返せるようにしたい。
   return { logIn, loading };
 };

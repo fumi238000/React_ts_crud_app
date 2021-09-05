@@ -18,7 +18,7 @@ export const usePostDelete = () => {
         console.log(error);
         showMessage({ title: "投稿を削除できませんでした", status: "success" });
       });
-  },[]);
+  }, []);
   //todo: 削除したidを渡して、それを削除する記述を書きたい
   return { deletePost };
 };

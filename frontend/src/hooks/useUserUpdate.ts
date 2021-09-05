@@ -48,6 +48,6 @@ export const useUserUpdate = () => {
           status: "error",
         });
       });
-  },[]);
+  }, []);
   return { userUpdate, loading };
 };
