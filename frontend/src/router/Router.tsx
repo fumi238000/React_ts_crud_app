@@ -12,7 +12,6 @@ import { Page404 } from "../components/pages/Page404";
 
 export const Router: VFC = memo(() => {
   const { userLoginStatus } = useContext(LoginUserContext);
-  console.log(userLoginStatus);
 
   return (
     <>
