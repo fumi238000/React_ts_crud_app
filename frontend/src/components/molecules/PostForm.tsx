@@ -1,4 +1,11 @@
-import { useState, useEffect, ChangeEvent, memo, VFC } from "react";
+import {
+  useState,
+  useEffect,
+  ChangeEvent,
+  memo,
+  VFC,
+  useCallback,
+} from "react";
 import {
   Box,
   Button,
@@ -24,25 +31,30 @@ export const PostForm: VFC<Props> = memo((props) => {
     props;
   const [inputPostTitle, setInputPostTitle] = useState("");
   const [inputPostDetails, setInputPostDetails] = useState("");
-  const onChangeInputPostTitle = (e: ChangeEvent<HTMLInputElement>) =>
-    setInputPostTitle(e.target.value);
-  const onChangeInputPostDetails = (e: ChangeEvent<HTMLInputElement>) =>
-    setInputPostDetails(e.target.value);
-  const { createPost, loading } = usePostCreate();
-  const { updatePost } = usePostUpdate();
+  const onChangeInputPostTitle = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => setInputPostTitle(e.target.value),
+    []
+  );
+  const onChangeInputPostDetails = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => setInputPostDetails(e.target.value),
+    []
+  );
+
+  const { createPost, createLoading } = usePostCreate();
+  const { updatePost, updateLoading } = usePostUpdate();
 
   useEffect(() => {
     setInputPostTitle(postTitle);
     setInputPostDetails(postDetails);
-  }, [postTitle, postDetails]);
+  }, []);
 
-  const onClickCreatePost = () => {
+  const onClickCreatePost = useCallback(() => {
     createPost(inputPostTitle, inputPostDetails);
-  };
+  }, [inputPostTitle, inputPostDetails]);
 
-  const onClickUpdatePost = () => {
+  const onClickUpdatePost = useCallback(() => {
     updatePost(postId, inputPostTitle, inputPostDetails);
-  };
+  }, [postId, inputPostTitle, inputPostDetails]);
 
   return (
     <Flex align="center" justify="center" height="50vh">
@@ -64,13 +76,13 @@ export const PostForm: VFC<Props> = memo((props) => {
             value={inputPostDetails}
             onChange={onChangeInputPostDetails}
           />
+
           {actionName === "編集" && (
             <Button
               bg="blue.500"
               color="white"
-              _hover={{ opacity: 0.7 }}
               onClick={onClickUpdatePost}
-              isLoading={loading}
+              isLoading={updateLoading}
               isDisabled={inputPostTitle === "" || inputPostDetails === ""}
             >
               {actionButtonName}
@@ -81,9 +93,8 @@ export const PostForm: VFC<Props> = memo((props) => {
             <Button
               bg="blue.500"
               color="white"
-              _hover={{ opacity: 0.7 }}
               onClick={onClickCreatePost}
-              isLoading={loading}
+              isLoading={createLoading}
               isDisabled={inputPostTitle === "" || inputPostDetails === ""}
             >
               {actionButtonName}

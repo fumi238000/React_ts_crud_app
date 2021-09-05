@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 
 import { UserUpdateUrl } from "../urls";
 import { useMessage } from "./useMessage";
@@ -14,7 +14,7 @@ export const useUserUpdate = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const userUpdate = (name: string, email: string) => {
+  const userUpdate = useCallback((name: string, email: string) => {
     setLoading(true);
 
     axios
@@ -48,6 +48,6 @@ export const useUserUpdate = () => {
           status: "error",
         });
       });
-  };
+  }, []);
   return { userUpdate, loading };
 };

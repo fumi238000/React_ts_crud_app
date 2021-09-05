@@ -26,13 +26,11 @@ export const LoginUserContext = createContext<LoginUserContextType>(
   {} as LoginUserContextType
 );
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const LoginUserProvider = (props: { children: ReactNode }) => {
   const { children } = props;
   const [loginUser, setLoginUser] = useState<User | null>(null);
-  const [userLoginStatus, setUserLoginStatus] = useState<boolean | boolean>(
-    false
-  );
-
+  const [userLoginStatus, setUserLoginStatus] = useState<boolean>(false);
   return (
     <LoginUserContext.Provider
       value={{ loginUser, setLoginUser, userLoginStatus, setUserLoginStatus }}

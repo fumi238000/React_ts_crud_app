@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import { logOutUrl } from "../urls";
@@ -12,7 +12,7 @@ export const useUserLogOut = () => {
   const { loginUser, setLoginUser, setUserLoginStatus } =
     useContext(LoginUserContext);
 
-  const logOut = () => {
+  const logOut = useCallback(() => {
     axios
       .delete(logOutUrl, {
         headers: {
@@ -31,6 +31,6 @@ export const useUserLogOut = () => {
         console.log(error);
         showMessage({ title: "ログアウトできませんでした", status: "error" });
       });
-  };
+  }, []);
   return { logOut };
 };

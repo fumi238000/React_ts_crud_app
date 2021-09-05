@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useCallback } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -9,15 +9,14 @@ import { LoginUserContext } from "../providers/LoginUserProvider";
 export const usePostCreate = () => {
   const history = useHistory();
   const { showMessage } = useMessage();
-  const [loading, setLoading] = useState(false);
+  const [createLoading, setCreateLoading] = useState(false);
   const { loginUser } = useContext(LoginUserContext);
 
-  const createPost = (postTitle: string, postDetails: string) => {
-    setLoading(true);
+  const createPost = useCallback((postTitle: string, postDetails: string) => {
+    setCreateLoading(true);
 
     axios
       .post(postsCreateUrl, {
-        user_id: 1,
         title: postTitle,
         details: postDetails,
         uid: loginUser?.uid,
@@ -26,17 +25,16 @@ export const usePostCreate = () => {
       })
       .then((res) => {
         console.log(res);
+        setCreateLoading(false);
         showMessage({ title: "投稿を作成しました", status: "success" });
-        setLoading(false);
         history.push("/posts");
       })
       .catch((error) => {
         console.log(error);
-        setLoading(false);
-        showMessage({ title: "作成に失敗しました", status: "error" });
+        setCreateLoading(false);
+        showMessage({ title: `${error.response.data}`, status: "error" });
       });
-  };
+  }, []);
 
-  //TODO: ここで作成したPostのidを返して、無駄なAPI通信を省きたい
-  return { createPost, loading };
+  return { createPost, createLoading };
 };
