@@ -13,6 +13,8 @@ export const useUserUpdate = () => {
     useContext(LoginUserContext);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const localStrageData = localStorage.getItem("LoginUser") as string;
+  const loginUserData = JSON.parse(localStrageData);
 
   const userUpdate = useCallback((name: string, email: string) => {
     setLoading(true);
@@ -21,20 +23,35 @@ export const useUserUpdate = () => {
       .put(UserUpdateUrl, {
         name: name,
         email: email,
-        uid: loginUser?.uid,
         "access-token": loginUser?.accessToken,
         client: loginUser?.client,
-        "Content-Type": `application/json`,
+        uid: loginUser?.uid,
       })
       .then((res) => {
-        setLoginUser({
-          userId: res.data[`data`][`id`],
+        const data = {
+          user_id: res.data[`data`][`id`],
           name: res.data[`data`][`name`],
           email: res.data[`data`][`email`],
-          accessToken: res.headers[`access-token`],
-          client: res.headers["client"],
+          "access-token": res.headers[`access-token`],
+          client: res.headers[`client`],
           uid: res.headers[`uid`],
+        };
+
+        //LocalStrage
+        const LoginUser = JSON.stringify(data);
+        localStorage.setItem("LoginUser", LoginUser);
+        const localStrageData = localStorage.getItem("LoginUser") as string;
+        const loginUserData = JSON.parse(localStrageData);
+
+        setLoginUser({
+          userId: loginUserData[`user_id`],
+          name: loginUserData[`name`],
+          email: loginUserData[`email`],
+          accessToken: loginUserData[`access-token`],
+          client: loginUserData[`client`],
+          uid: loginUserData[`uid`],
         });
+
         showMessage({ title: "ユーザー情報を更新しました", status: "success" });
         setUserLoginStatus(true);
         setLoading(false);

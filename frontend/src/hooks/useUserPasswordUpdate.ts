@@ -13,6 +13,8 @@ export const useUserPasswordUpdate = () => {
   const { loginUser, setLoginUser, setUserLoginStatus } =
     useContext(LoginUserContext);
   const [loading, setLoading] = useState(false);
+  const localStrageData = localStorage.getItem("LoginUser") as string;
+  const loginUserData = JSON.parse(localStrageData);
 
   const userPasswordUpdate = useCallback((password: string) => {
     setLoading(true);
@@ -27,14 +29,16 @@ export const useUserPasswordUpdate = () => {
         "Content-Type": "application/json",
       })
       .then((res) => {
-        setLoginUser({
-          userId: res.data[`data`][`id`],
-          name: res.data[`data`][`name`],
-          email: res.data[`data`][`email`],
-          accessToken: res.headers[`access-token`],
-          client: res.headers["client"],
-          uid: res.headers[`uid`],
+
+      setLoginUser({
+          userId: loginUserData[`user_id`],
+          name: loginUserData[`name`],
+          email: loginUserData[`email`],
+          accessToken: loginUserData[`access-token`],
+          client: loginUserData[`client`],
+          uid: loginUserData[`uid`],
         });
+
         showMessage({
           title: "ユーザーのパスワードを更新しました",
           status: "success",

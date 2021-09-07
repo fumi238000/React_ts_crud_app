@@ -1,16 +1,16 @@
-import { useState, useContext, useCallback } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 import { postsCreateUrl } from "../urls";
 import { useMessage } from "./useMessage";
-import { LoginUserContext } from "../providers/LoginUserProvider";
 
 export const usePostCreate = () => {
   const history = useHistory();
   const { showMessage } = useMessage();
   const [createLoading, setCreateLoading] = useState(false);
-  const { loginUser } = useContext(LoginUserContext);
+  const localStrageData = localStorage.getItem("LoginUser") as string;
+  const loginUserData = JSON.parse(localStrageData);
 
   const createPost = useCallback((postTitle: string, postDetails: string) => {
     setCreateLoading(true);
@@ -19,9 +19,9 @@ export const usePostCreate = () => {
       .post(postsCreateUrl, {
         title: postTitle,
         details: postDetails,
-        uid: loginUser?.uid,
-        "access-token": loginUser?.accessToken,
-        client: loginUser?.client,
+        "access-token": loginUserData[`access-token`],
+        client: loginUserData[`client`],
+        uid: loginUserData[`uid`],
       })
       .then((res) => {
         console.log(res);

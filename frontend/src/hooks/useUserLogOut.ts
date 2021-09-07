@@ -22,6 +22,7 @@ export const useUserLogOut = () => {
         },
       })
       .then((res) => {
+        localStorage.removeItem("LoginUser");
         setLoginUser(null);
         setUserLoginStatus(false);
         showMessage({ title: "ログアウトしました", status: "error" });

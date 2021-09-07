@@ -1,4 +1,4 @@
-import { memo, useContext, VFC } from "react";
+import { memo, useContext, VFC, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import { PostRoutes } from "./PostRoutes";
@@ -11,7 +11,25 @@ import { PasswordEditPage } from "../components/pages/user/PasswordEditPage";
 import { Page404 } from "../components/pages/Page404";
 
 export const Router: VFC = memo(() => {
-  const { userLoginStatus } = useContext(LoginUserContext);
+  const { userLoginStatus, setUserLoginStatus, setLoginUser } =
+    useContext(LoginUserContext);
+
+  useEffect(() => {
+    const localStrageData = localStorage.getItem("LoginUser") as string;
+    if (localStrageData) {
+      const loginUserData = JSON.parse(localStrageData);
+      setUserLoginStatus(true);
+      setLoginUser({
+        userId: loginUserData[`user_id`],
+        name: loginUserData[`name`],
+        email: loginUserData[`email`],
+        accessToken: loginUserData[`access-token`],
+        client: loginUserData[`client`],
+        uid: loginUserData[`uid`],
+      });
+      // localStorage.removeItem('LoginUser');
+    }
+  }, []);
 
   return (
     <>
@@ -34,14 +52,6 @@ export const Router: VFC = memo(() => {
             )}
           ></Route>
 
-          <Route path="/login">
-            <LoginPage />
-          </Route>
-
-          <Route path="/signup">
-            <SignUpPage />
-          </Route>
-
           <Route path="/user/edit">
             <UserEditPage />
           </Route>
@@ -61,9 +71,19 @@ export const Router: VFC = memo(() => {
       )}
 
       {!userLoginStatus && (
-        <Route path="*">
-          <LoginPage />
-        </Route>
+        <Switch>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+
+          <Route path="/signup">
+            <SignUpPage />
+          </Route>
+
+          <Route path="*">
+            <LoginPage />
+          </Route>
+        </Switch>
       )}
     </>
   );
