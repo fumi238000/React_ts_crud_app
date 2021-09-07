@@ -10,9 +10,9 @@ type User = {
   userId: number;
   name: string;
   email: string;
-  uid?: string;
-  client?: string;
-  accessToken?: string;
+  uid: string;
+  client: string;
+  accessToken: string;
 };
 
 type LoginUserContextType = {

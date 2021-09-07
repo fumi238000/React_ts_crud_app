@@ -12,6 +12,9 @@ export const usePostUpdate = () => {
   const [updateLoading, setupdateLoading] = useState(false);
   const { loginUser } = useContext(LoginUserContext);
 
+  const localStrageData = localStorage.getItem("LoginUser") as string;
+  const loginUserData = JSON.parse(localStrageData);
+
   const updatePost = useCallback(
     (postId: number, postTitle: string, postDetals: string) => {
       setupdateLoading(true);
@@ -20,9 +23,9 @@ export const usePostUpdate = () => {
         .put(postsUpdateUrl(postId), {
           title: postTitle,
           details: postDetals,
-          uid: loginUser?.uid,
-          "access-token": loginUser?.accessToken,
-          client: loginUser?.client,
+          "access-token": loginUserData[`access-token`],
+          client: loginUserData[`client`],
+          uid: loginUserData[`uid`],
         })
         .then((res) => {
           console.log(res);
