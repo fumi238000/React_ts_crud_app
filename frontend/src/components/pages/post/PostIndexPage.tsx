@@ -5,6 +5,14 @@ import { useHistory } from "react-router-dom";
 import { PostCard } from "../../organisms/post/PostCard";
 import { usePostIndex } from "../../../hooks/usePostIndex";
 
+type Posts = {
+  id: number;
+  title: string;
+  details: string;
+  user_id: number;
+  user: { name: string };
+};
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const PostIndexPage = memo(() => {
   const history = useHistory();
@@ -13,7 +21,6 @@ export const PostIndexPage = memo(() => {
     [history]
   );
   const { getPosts, posts } = usePostIndex();
-  // todo: postsを持っていない場合のみ取得する
   useEffect(() => getPosts(), []);
 
   return (
@@ -26,8 +33,7 @@ export const PostIndexPage = memo(() => {
           新規作成
         </Button>
       </Box>
-      {posts.map((post) => (
-        // eslint-disable-next-line react/jsx-key
+      {posts.map((post: Posts) => (
         <PostCard
           key={post.id}
           postUserId={post.user_id}
