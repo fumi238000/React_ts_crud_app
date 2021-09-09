@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { logInUrl } from "../urls";
 import { useMessage } from "./useMessage";
 import { LoginUserContext } from "../providers/LoginUserProvider";
+import { LocalStrageUserType } from "../types/api/user";
 
 export const useUserLogIn = () => {
   const history = useHistory();
@@ -21,7 +22,7 @@ export const useUserLogIn = () => {
         password: password,
       })
       .then((res) => {
-        const data = {
+        const data: LocalStrageUserType = {
           user_id: res.data[`data`][`id`],
           name: res.data[`data`][`name`],
           email: res.data[`data`][`email`],
@@ -34,7 +35,7 @@ export const useUserLogIn = () => {
         const LoginUser = JSON.stringify(data);
         localStorage.setItem("LoginUser", LoginUser);
         const localStrageData = localStorage.getItem("LoginUser") as string;
-        const loginUserData = JSON.parse(localStrageData);
+        const loginUserData: LocalStrageUserType  = JSON.parse(localStrageData);
 
         setLoginUser({
           userId: loginUserData[`user_id`],

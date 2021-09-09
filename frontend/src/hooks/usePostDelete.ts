@@ -1,15 +1,16 @@
 import axios from "axios";
-import { useCallback, useContext, useState } from "react";
-import { PostContext } from "../providers/PostProvider";
+import { useCallback, useContext } from "react";
 
+import { PostContext } from "../providers/PostProvider";
 import { postsDeleteUrl } from "../urls";
 import { useMessage } from "./useMessage";
 import { PostType } from "../types/api/post";
+import { LocalStrageUserType } from "../types/api/user";
 
 export const usePostDelete = () => {
   const { showMessage } = useMessage();
   const localStrageData = localStorage.getItem("LoginUser") as string;
-  const loginUserData = JSON.parse(localStrageData);
+  const loginUserData:LocalStrageUserType = JSON.parse(localStrageData);
   const { posts, setPosts } = useContext(PostContext);
 
   const deletePost = useCallback((postId: number) => {

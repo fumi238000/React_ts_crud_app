@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { LoginUserContext } from "../providers/LoginUserProvider";
+import { LocalStrageUserType } from "../types/api/user";
 
 import { postsUpdateUrl } from "../urls";
 import { useMessage } from "./useMessage";
@@ -10,10 +10,9 @@ export const usePostUpdate = () => {
   const history = useHistory();
   const { showMessage } = useMessage();
   const [updateLoading, setupdateLoading] = useState(false);
-  const { loginUser } = useContext(LoginUserContext);
 
   const localStrageData = localStorage.getItem("LoginUser") as string;
-  const loginUserData = JSON.parse(localStrageData);
+  const loginUserData:LocalStrageUserType = JSON.parse(localStrageData);
 
   const updatePost = useCallback(
     (postId: number, postTitle: string, postDetals: string) => {

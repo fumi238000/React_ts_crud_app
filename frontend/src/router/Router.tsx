@@ -9,6 +9,7 @@ import { SignUpPage } from "../components/pages/user/SignUpPage";
 import { UserEditPage } from "../components/pages/user/UserEditPage";
 import { PasswordEditPage } from "../components/pages/user/PasswordEditPage";
 import { Page404 } from "../components/pages/Page404";
+import { LocalStrageUserType } from "../types/api/user";
 
 export const Router: VFC = memo(() => {
   const { userLoginStatus, setUserLoginStatus, setLoginUser } =
@@ -17,7 +18,7 @@ export const Router: VFC = memo(() => {
   useEffect(() => {
     const localStrageData = localStorage.getItem("LoginUser") as string;
     if (localStrageData) {
-      const loginUserData = JSON.parse(localStrageData);
+      const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
       setUserLoginStatus(true);
       setLoginUser({
         userId: loginUserData[`user_id`],
@@ -27,7 +28,6 @@ export const Router: VFC = memo(() => {
         client: loginUserData[`client`],
         uid: loginUserData[`uid`],
       });
-      // localStorage.removeItem('LoginUser');
     }
   }, []);
 
