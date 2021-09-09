@@ -27,8 +27,6 @@ export const PostCard: VFC<Props> = memo((props) => {
 
   const onClickPostDelete = useCallback((postId: number) => {
     deletePost(postId);
-    window.location.reload();
-    // setPosts(posts.filter(post => post.id !== post.id)) //将来的にこちらに置き換える
   }, []);
 
   return (

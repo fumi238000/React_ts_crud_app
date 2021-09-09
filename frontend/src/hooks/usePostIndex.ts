@@ -1,23 +1,15 @@
-import { useCallback, useState } from "react";
+import { useCallback, useContext } from "react";
 import axios from "axios";
 
 import { postsIndexUrl } from "../urls";
-
-type Posts = {
-  id: number;
-  title: string;
-  details: string;
-  user_id: number;
-  user: { name: string };
-};
+import { PostContext } from "../providers/PostProvider";
 
 export const usePostIndex = () => {
-  const [posts, setPosts] = useState<Array<Posts>>([]);
+  const { posts, setPosts } = useContext(PostContext);
   const getPosts = useCallback(() => {
     axios
       .get(postsIndexUrl)
       .then((res) => {
-        console.log(res.data);
         setPosts(res.data);
       })
       .catch((error) => {

@@ -1,14 +1,16 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 import { postsCreateUrl } from "../urls";
 import { useMessage } from "./useMessage";
+import { PostContext } from "../providers/PostProvider";
 
 export const usePostCreate = () => {
   const history = useHistory();
   const { showMessage } = useMessage();
   const [createLoading, setCreateLoading] = useState(false);
+  const { posts, setPosts } = useContext(PostContext);
   const localStrageData = localStorage.getItem("LoginUser") as string;
   const loginUserData = JSON.parse(localStrageData);
 
@@ -26,6 +28,7 @@ export const usePostCreate = () => {
       .then((res) => {
         console.log(res);
         setCreateLoading(false);
+        setPosts([...posts, res.data]);
         showMessage({ title: "投稿を作成しました", status: "success" });
         history.push("/posts");
       })

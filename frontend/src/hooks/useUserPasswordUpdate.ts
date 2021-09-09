@@ -29,8 +29,7 @@ export const useUserPasswordUpdate = () => {
         "Content-Type": "application/json",
       })
       .then((res) => {
-
-      setLoginUser({
+        setLoginUser({
           userId: loginUserData[`user_id`],
           name: loginUserData[`name`],
           email: loginUserData[`email`],
