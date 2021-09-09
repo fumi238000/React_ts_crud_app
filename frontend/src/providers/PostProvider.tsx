@@ -5,19 +5,12 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-
-type Posts = {
-  id: number;
-  title: string;
-  details: string;
-  user_id: number;
-  user: { name: string };
-};
+import { PostType } from "../types/api/post";
 
 // TOOD: 型をきちんと定義すること。
 type PostsContextType = {
-  posts: Array<Posts>;
-  setPosts: Dispatch<SetStateAction<Array<Posts>>>;
+  posts: Array<PostType >;
+  setPosts: Dispatch<SetStateAction<Array<PostType >>>;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

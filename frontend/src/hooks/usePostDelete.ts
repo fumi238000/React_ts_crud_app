@@ -4,14 +4,7 @@ import { PostContext } from "../providers/PostProvider";
 
 import { postsDeleteUrl } from "../urls";
 import { useMessage } from "./useMessage";
-
-type Post = {
-  id: number;
-  title: string;
-  details: string;
-  user_id: number;
-  user: { name: string };
-};
+import { PostType } from "../types/api/post";
 
 export const usePostDelete = () => {
   const { showMessage } = useMessage();
@@ -32,7 +25,7 @@ export const usePostDelete = () => {
         console.log(res);
         //TODO: 2回目以降がうまくいかないので、修正すること
         setPosts(
-          posts.filter((post: Post) => {
+          posts.filter((post: PostType) => {
             return post.id !== postId;
           })
         );
