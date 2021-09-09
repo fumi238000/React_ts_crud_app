@@ -4,3 +4,11 @@ export type TodoType = {
   title: string;
   details: string;
 };
+
+export type PostType = {
+  id: number;
+  title: string;
+  details: string;
+  user_id: number;
+  user: { name: string };
+};
