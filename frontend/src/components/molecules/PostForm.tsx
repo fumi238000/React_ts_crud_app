@@ -83,7 +83,7 @@ export const PostForm: VFC<Props> = memo((props) => {
               color="white"
               onClick={onClickUpdatePost}
               isLoading={updateLoading}
-              isDisabled={inputPostTitle === "" || inputPostDetails === ""}
+              isDisabled={inputPostTitle === "" || inputPostTitle.length > 8 || inputPostDetails === "" || inputPostDetails.length > 30}
             >
               {actionButtonName}
             </Button>
@@ -95,7 +95,7 @@ export const PostForm: VFC<Props> = memo((props) => {
               color="white"
               onClick={onClickCreatePost}
               isLoading={createLoading}
-              isDisabled={inputPostTitle === "" || inputPostDetails === ""}
+              isDisabled={inputPostTitle === "" || inputPostTitle.length > 8 || inputPostDetails === "" || inputPostDetails.length > 30}
             >
               {actionButtonName}
             </Button>
