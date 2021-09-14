@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { UserPwUPdateUrl } from "../urls";
 import { useMessage } from "./useMessage";
 import { LoginUserContext } from "../providers/LoginUserProvider";
+import { LocalStrageUserType } from "../types/api/user";
 
 export const useUserPasswordUpdate = () => {
   const history = useHistory();
@@ -14,7 +15,7 @@ export const useUserPasswordUpdate = () => {
     useContext(LoginUserContext);
   const [loading, setLoading] = useState(false);
   const localStrageData = localStorage.getItem("LoginUser") as string;
-  const loginUserData = JSON.parse(localStrageData);
+  const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
 
   const userPasswordUpdate = useCallback((password: string) => {
     setLoading(true);
@@ -26,7 +27,6 @@ export const useUserPasswordUpdate = () => {
         uid: loginUser?.uid,
         "access-token": loginUser?.accessToken,
         client: loginUser?.client,
-        "Content-Type": "application/json",
       })
       .then((res) => {
         setLoginUser({
@@ -37,7 +37,6 @@ export const useUserPasswordUpdate = () => {
           client: loginUserData[`client`],
           uid: loginUserData[`uid`],
         });
-
         showMessage({
           title: "ユーザーのパスワードを更新しました",
           status: "success",

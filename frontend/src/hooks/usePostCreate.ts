@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { postsCreateUrl } from "../urls";
 import { useMessage } from "./useMessage";
 import { PostContext } from "../providers/PostProvider";
+import { LocalStrageUserType } from "../types/api/user";
 
 export const usePostCreate = () => {
   const history = useHistory();
@@ -12,7 +13,7 @@ export const usePostCreate = () => {
   const [createLoading, setCreateLoading] = useState(false);
   const { posts, setPosts } = useContext(PostContext);
   const localStrageData = localStorage.getItem("LoginUser") as string;
-  const loginUserData = JSON.parse(localStrageData);
+  const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
 
   const createPost = useCallback((postTitle: string, postDetails: string) => {
     setCreateLoading(true);

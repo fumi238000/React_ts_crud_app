@@ -6,6 +6,7 @@ import { UserUpdateUrl } from "../urls";
 import { useMessage } from "./useMessage";
 import { LoginUserContext } from "../providers/LoginUserProvider";
 import { useHistory } from "react-router-dom";
+import { LocalStrageUserType } from "../types/api/user";
 
 export const useUserUpdate = () => {
   const { showMessage } = useMessage();
@@ -14,7 +15,7 @@ export const useUserUpdate = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const localStrageData = localStorage.getItem("LoginUser") as string;
-  const loginUserData = JSON.parse(localStrageData);
+  const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
 
   const userUpdate = useCallback((name: string, email: string) => {
     setLoading(true);
@@ -28,7 +29,7 @@ export const useUserUpdate = () => {
         uid: loginUser?.uid,
       })
       .then((res) => {
-        const data = {
+        const data: LocalStrageUserType = {
           user_id: res.data[`data`][`id`],
           name: res.data[`data`][`name`],
           email: res.data[`data`][`email`],
@@ -41,7 +42,7 @@ export const useUserUpdate = () => {
         const LoginUser = JSON.stringify(data);
         localStorage.setItem("LoginUser", LoginUser);
         const localStrageData = localStorage.getItem("LoginUser") as string;
-        const loginUserData = JSON.parse(localStrageData);
+        const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
 
         setLoginUser({
           userId: loginUserData[`user_id`],

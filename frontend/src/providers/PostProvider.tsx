@@ -1,34 +1,26 @@
 import {
   createContext,
-  ReactNode,
-  useState,
   Dispatch,
+  ReactNode,
   SetStateAction,
+  useState,
 } from "react";
+import { PostType } from "../types/api/post";
 
-type Posts = {
-  id: number;
-  title: string;
-  details: string;
-  user_id: number;
-  user: { name: string };
-};
-
-// TOOD: 型をきちんと定義すること。
 type PostsContextType = {
-  posts: Array<Posts>;
-  setPosts: Dispatch<SetStateAction<Array<Posts>>>;
+  posts: PostType;
+  setPosts: Dispatch<SetStateAction<PostType>>;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+//暫定
 export const PostContext = createContext<any>([]);
+//TODO: なぜ、以下のようのに定義できないのか明らかにすること
+// export const PostContext = createContext<Array<PostsContextType>>([]);
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const PostProvider = (props: { children: ReactNode }) => {
   const { children } = props;
-
   const [posts, setPosts] = useState<Array<PostsContextType>>([]);
-
   return (
     <PostContext.Provider value={{ posts, setPosts }}>
       {children}

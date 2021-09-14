@@ -4,14 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { PostCard } from "../../organisms/post/PostCard";
 import { usePostIndex } from "../../../hooks/usePostIndex";
-
-type Posts = {
-  id: number;
-  title: string;
-  details: string;
-  user_id: number;
-  user: { name: string };
-};
+import { PostType } from "../../../types/api/post";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const PostIndexPage = memo(() => {
@@ -33,7 +26,7 @@ export const PostIndexPage = memo(() => {
           新規作成
         </Button>
       </Box>
-      {posts.map((post: Posts) => (
+      {posts.map((post: PostType) => (
         <PostCard
           key={post.id}
           postUserId={post.user_id}
