@@ -14,4 +14,4 @@ export type LocalStrageUserType = {
   uid: string;
   client: string;
   "access-token": string;
-}
+};

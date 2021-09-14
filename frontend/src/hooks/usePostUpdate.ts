@@ -12,7 +12,7 @@ export const usePostUpdate = () => {
   const [updateLoading, setupdateLoading] = useState(false);
 
   const localStrageData = localStorage.getItem("LoginUser") as string;
-  const loginUserData:LocalStrageUserType = JSON.parse(localStrageData);
+  const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
 
   const updatePost = useCallback(
     (postId: number, postTitle: string, postDetals: string) => {

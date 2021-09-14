@@ -24,7 +24,7 @@ export const useUserSignUp = () => {
         password: password,
       })
       .then((res) => {
-        const data:LocalStrageUserType  = {
+        const data: LocalStrageUserType = {
           user_id: res.data[`data`][`id`],
           name: res.data[`data`][`name`],
           email: res.data[`data`][`email`],

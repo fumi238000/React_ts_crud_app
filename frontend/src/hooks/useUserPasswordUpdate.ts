@@ -37,7 +37,10 @@ export const useUserPasswordUpdate = () => {
           client: loginUserData[`client`],
           uid: loginUserData[`uid`],
         });
-        showMessage({title: "ユーザーのパスワードを更新しました",status: "success",});
+        showMessage({
+          title: "ユーザーのパスワードを更新しました",
+          status: "success",
+        });
         setUserLoginStatus(true);
         setLoading(false);
         history.push("/mypage");

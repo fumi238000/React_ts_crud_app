@@ -10,7 +10,7 @@ import { LocalStrageUserType } from "../types/api/user";
 export const usePostDelete = () => {
   const { showMessage } = useMessage();
   const localStrageData = localStorage.getItem("LoginUser") as string;
-  const loginUserData:LocalStrageUserType = JSON.parse(localStrageData);
+  const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
   const { posts, setPosts } = useContext(PostContext);
 
   const deletePost = useCallback((postId: number) => {

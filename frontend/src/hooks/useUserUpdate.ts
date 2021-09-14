@@ -15,7 +15,7 @@ export const useUserUpdate = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const localStrageData = localStorage.getItem("LoginUser") as string;
-  const loginUserData:LocalStrageUserType = JSON.parse(localStrageData);
+  const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
 
   const userUpdate = useCallback((name: string, email: string) => {
     setLoading(true);
@@ -42,7 +42,7 @@ export const useUserUpdate = () => {
         const LoginUser = JSON.stringify(data);
         localStorage.setItem("LoginUser", LoginUser);
         const localStrageData = localStorage.getItem("LoginUser") as string;
-        const loginUserData:LocalStrageUserType = JSON.parse(localStrageData);
+        const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
 
         setLoginUser({
           userId: loginUserData[`user_id`],

@@ -13,7 +13,7 @@ export const usePostCreate = () => {
   const [createLoading, setCreateLoading] = useState(false);
   const { posts, setPosts } = useContext(PostContext);
   const localStrageData = localStorage.getItem("LoginUser") as string;
-  const loginUserData:LocalStrageUserType = JSON.parse(localStrageData);
+  const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
 
   const createPost = useCallback((postTitle: string, postDetails: string) => {
     setCreateLoading(true);

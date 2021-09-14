@@ -35,7 +35,7 @@ export const useUserLogIn = () => {
         const LoginUser = JSON.stringify(data);
         localStorage.setItem("LoginUser", LoginUser);
         const localStrageData = localStorage.getItem("LoginUser") as string;
-        const loginUserData: LocalStrageUserType  = JSON.parse(localStrageData);
+        const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
 
         setLoginUser({
           userId: loginUserData[`user_id`],
