@@ -1,18 +1,17 @@
 import axios from "axios";
 import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { LocalStrageUserType } from "../types/api/user";
+
 
 import { postsUpdateUrl } from "../urls";
+import { useLocalStrage } from "./useLocalStrage";
 import { useMessage } from "./useMessage";
 
 export const usePostUpdate = () => {
   const history = useHistory();
   const { showMessage } = useMessage();
   const [updateLoading, setupdateLoading] = useState(false);
-
-  const localStrageData = localStorage.getItem("LoginUser") as string;
-  const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
+  const { loginUserData} = useLocalStrage();
 
   const updatePost = useCallback(
     (postId: number, postTitle: string, postDetals: string) => {

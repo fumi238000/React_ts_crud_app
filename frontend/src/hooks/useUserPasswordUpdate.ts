@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { UserPwUPdateUrl } from "../urls";
 import { useMessage } from "./useMessage";
 import { LoginUserContext } from "../providers/LoginUserProvider";
-import { LocalStrageUserType } from "../types/api/user";
+import { useLocalStrage } from "./useLocalStrage";
 
 export const useUserPasswordUpdate = () => {
   const history = useHistory();
@@ -14,8 +14,7 @@ export const useUserPasswordUpdate = () => {
   const { loginUser, setLoginUser, setUserLoginStatus } =
     useContext(LoginUserContext);
   const [loading, setLoading] = useState(false);
-  const localStrageData = localStorage.getItem("LoginUser") as string;
-  const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
+  const { loginUserData} = useLocalStrage();
 
   const userPasswordUpdate = useCallback((password: string) => {
     setLoading(true);

@@ -5,12 +5,12 @@ import { PostContext } from "../providers/PostProvider";
 import { postsDeleteUrl } from "../urls";
 import { useMessage } from "./useMessage";
 import { PostType } from "../types/api/post";
-import { LocalStrageUserType } from "../types/api/user";
+import { useLocalStrage } from "./useLocalStrage";
+
 
 export const usePostDelete = () => {
   const { showMessage } = useMessage();
-  const localStrageData = localStorage.getItem("LoginUser") as string;
-  const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
+  const { loginUserData} = useLocalStrage();
   const { posts, setPosts } = useContext(PostContext);
 
   const deletePost = useCallback((postId: number) => {
