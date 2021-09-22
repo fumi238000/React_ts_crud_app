@@ -1,15 +1,16 @@
 module V1
   class PostsController < ApplicationController
+    before_action :authenticate_v1_user!, only: %i[index create update destroy]
+    before_action :set_user_post, only: %i[index create]
     before_action :set_post, only: %i[update destroy]
-    before_action :authenticate_v1_user!, only: %i[create update destroy]
 
     def index
-      posts = Post.includes(:user).order(id: :asc)
+      posts = @user_posts.posts_index
       render json: posts, include: { user: [:name] }
     end
 
     def create
-      post = current_v1_user.posts.new(post_params)
+      post = @user_posts.new(post_params)
 
       if post.save
         render json: post
@@ -31,6 +32,10 @@ module V1
     end
 
     private
+
+    def set_user_post
+      @user_posts = current_v1_user.posts
+    end
 
     def set_post
       @post = current_v1_user.posts.find(params[:id])
