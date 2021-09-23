@@ -6,15 +6,36 @@ import {
   Stack,
   Input,
   Button,
+  Text,
 } from "@chakra-ui/react";
 import { ChangeEvent, memo, useState, VFC } from "react";
 import { useUserPasswordUpdate } from "../../../hooks/useUserPasswordUpdate";
+import { useUserValidate } from "../../../hooks/useUserValidate";
 import { GoBackButton } from "../../atms/button/GoBackButton";
 
 export const PasswordEditPage: VFC = memo(() => {
   const [inputUserPassword, setInputUserPassword] = useState<string>("");
-  const onChangeInputUserPassword = (e: ChangeEvent<HTMLInputElement>) =>
-    setInputUserPassword(e.target.value);
+  const [inputConformPassword, setInputConformPassword] = useState<string>("");
+
+  const {
+    inputUserPasswordError,
+    inputConformPasswordError,
+    validateEditUserPassword,
+    validateEditConformPassword,
+  } = useUserValidate();
+
+  const onChangeInputUserPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    const password = e.target.value;
+    setInputUserPassword(password);
+    validateEditUserPassword(password);
+  };
+
+  const onChangeInputConformPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    const conformPassword = e.target.value;
+    setInputConformPassword(conformPassword);
+    validateEditConformPassword(inputUserPassword, conformPassword);
+  };
+
   const { userPasswordUpdate, loading } = useUserPasswordUpdate();
 
   //更新ボタン
@@ -39,12 +60,29 @@ export const PasswordEditPage: VFC = memo(() => {
               value={inputUserPassword}
               onChange={onChangeInputUserPassword}
             />
+            {inputUserPasswordError && (
+              <Text color="red">{inputUserPasswordError}</Text>
+            )}
+
+            <p>新しいパスワード(確認用)</p>
+            <Input
+              placeholder="パスワード"
+              type="password"
+              value={inputConformPassword}
+              onChange={onChangeInputConformPassword}
+            />
+            {inputConformPasswordError && (
+              <Text color="red">{inputConformPasswordError}</Text>
+            )}
+
             <Button
               bg="blue.500"
               color="white"
               onClick={onClickPasswordUpdate}
               isLoading={loading}
-              isDisabled={inputUserPassword === ""}
+              isDisabled={
+                !!inputUserPasswordError || !!inputConformPasswordError
+              }
             >
               更新する
             </Button>
