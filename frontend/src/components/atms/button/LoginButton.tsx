@@ -5,19 +5,20 @@ type Props = {
   children: ReactNode;
   onClick: () => void;
   loading: boolean;
-  inputPassword: string;
-  inputEmail: string;
+  inputEmailError: string;
+  inputPasswordError: string;
 };
 
-export const BlueButton: VFC<Props> = memo((props) => {
-  const { children, onClick, loading, inputPassword, inputEmail } = props;
+export const LoginButton: VFC<Props> = memo((props) => {
+  const { children, onClick, loading, inputEmailError, inputPasswordError } =
+    props;
   return (
     <Button
       bg="blue.500"
       color="white"
       onClick={onClick}
       isLoading={loading}
-      isDisabled={inputEmail === "" || inputPassword === ""}
+      isDisabled={!!inputEmailError || !!inputPasswordError}
     >
       {children}
     </Button>
