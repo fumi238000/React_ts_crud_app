@@ -6,25 +6,41 @@ import {
   Stack,
   Input,
   Button,
+  Text,
 } from "@chakra-ui/react";
 import { ChangeEvent, memo, useState, VFC } from "react";
 import { useUserUpdate } from "../../../hooks/useUserUpdate";
 import { GoBackButton } from "../../atms/button/GoBackButton";
+import { useUserValidate } from "../../../hooks/useUserValidate";
+import { useLocalStrage } from "../../../hooks/useLocalStrage";
 
 export const UserEditPage: VFC = memo(() => {
   const { userUpdate, loading } = useUserUpdate();
-  //todo: 初期値をログインユーザーにしたい。
-  // ここにログインユーザーの情報を取得するカスタムフックを追加するか？
+  const {
+    inputEmailError,
+    inputNameError,
+    validateEditUserEmail,
+    validateEditUserName,
+  } = useUserValidate();
+  const { loginUserData } = useLocalStrage();
 
   //name
-  const [inputUserName, setInputUserName] = useState<string>("");
-  const onChangeInputUserName = (e: ChangeEvent<HTMLInputElement>) =>
-    setInputUserName(e.target.value);
+  const [inputUserName, setInputUserName] = useState<string>(
+    loginUserData.name
+  );
+  const onChangeInputUserName = (e: ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.value;
+    setInputUserName(name);
+    validateEditUserName(name);
+  };
 
   //email
-  const onChangeInputEmail = (e: ChangeEvent<HTMLInputElement>) =>
-    setinputEmail(e.target.value);
-  const [inputEmail, setinputEmail] = useState<string>("");
+  const [inputEmail, setinputEmail] = useState<string>(loginUserData.email);
+  const onChangeInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    const email = e.target.value;
+    setinputEmail(email);
+    validateEditUserEmail(email);
+  };
 
   //更新ボタン
   const onClickUserUpdate = () => {
@@ -48,6 +64,8 @@ export const UserEditPage: VFC = memo(() => {
               value={inputUserName}
               onChange={onChangeInputUserName}
             />
+            {inputNameError && <Text color="red">{inputNameError}</Text>}
+
             <p>新しいEmail</p>
             <Input
               placeholder="Email"
@@ -55,12 +73,14 @@ export const UserEditPage: VFC = memo(() => {
               value={inputEmail}
               onChange={onChangeInputEmail}
             />
+            {inputEmailError && <Text color="red">{inputEmailError}</Text>}
+
             <Button
               bg="blue.500"
               color="white"
               onClick={onClickUserUpdate}
               isLoading={loading}
-              isDisabled={inputUserName === "" || inputEmail === ""}
+              isDisabled={!!inputNameError || !!inputEmailError}
             >
               更新する
             </Button>
