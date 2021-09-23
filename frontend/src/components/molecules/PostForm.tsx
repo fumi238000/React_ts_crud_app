@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { usePostCreate } from "../../hooks/usePostCreate";
 import { usePostUpdate } from "../../hooks/usePostUpdate";
+import { usePostValidate } from "../../hooks/usePostValidate";
 
 type Props = {
   postId?: any;
@@ -28,52 +29,32 @@ type Props = {
 };
 
 export const PostForm: VFC<Props> = memo((props) => {
-  const maxTitleLength = 8
-  const maxDetailsLength = 30
-
   const { postId, postTitle, postDetails, actionName, actionButtonName } =
     props;
-  const [inputPostTitle, setInputPostTitle] = useState<string>("");
-  const [inputPostDetails, setInputPostDetails] = useState<string>("");
-  const [inputPostTitleError, setInputPostTitleError] = useState<string>("");
-  const [inputPostDetailsError, setInputPostDetailsError] = useState<string>("");
 
-  const onChangeInputPostTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    const title = e.target.value
-    setInputPostTitle(title);
-    validatePostTitle(title)
-    };
-
-  const onChangeInputPostDetails = (e: ChangeEvent<HTMLInputElement>) => {
-    const details = e.target.value
-    setInputPostDetails(details)
-    validatePostDetails(details)
-  };
-
-  //TODO: カスタムフック化する
-  const validatePostTitle =(inputPostTitle:string) => {
-    let error = "";
-    if ( !inputPostTitle) {
-      error = "タイトルを入力してください";
-    } else if ( inputPostTitle.length > maxTitleLength ) {
-      error = `タイトルは${maxTitleLength}文字以下で入力してください`;
-    }
-    setInputPostTitleError(error)
-  };
-
-  //TODO: カスタムフック化する
-  const validatePostDetails =(inputPostDetails:string) => {
-    let error = "";
-    if ( !inputPostDetails) {
-      error = "詳細を入力してください";
-    } else if ( inputPostDetails.length > maxDetailsLength ) {
-      error = `詳細は${maxDetailsLength}文字以下で入力してください`;
-    }
-    setInputPostDetailsError(error)
-  };
-
+  const {
+    validatePostTitle,
+    inputPostTitleError,
+    validatePostDetails,
+    inputPostDetailsError,
+  } = usePostValidate();
   const { createPost, createLoading } = usePostCreate();
   const { updatePost, updateLoading } = usePostUpdate();
+
+  const [inputPostTitle, setInputPostTitle] = useState<string>("");
+  const [inputPostDetails, setInputPostDetails] = useState<string>("");
+
+  const onChangeInputPostTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    const title = e.target.value;
+    setInputPostTitle(title);
+    validatePostTitle(title);
+  };
+
+  const onChangeInputPostDetails = (e: ChangeEvent<HTMLInputElement>) => {
+    const details = e.target.value;
+    setInputPostDetails(details);
+    validatePostDetails(details);
+  };
 
   useEffect(() => {
     setInputPostTitle(postTitle);
@@ -103,9 +84,9 @@ export const PostForm: VFC<Props> = memo((props) => {
             onChange={onChangeInputPostTitle}
           />
 
-          { inputPostTitleError &&
-              <Text color="red">{inputPostTitleError}</Text>
-          }
+          {inputPostTitleError && (
+            <Text color="red">{inputPostTitleError}</Text>
+          )}
 
           <p>詳細</p>
           <Input
@@ -114,9 +95,9 @@ export const PostForm: VFC<Props> = memo((props) => {
             onChange={onChangeInputPostDetails}
           />
 
-          { inputPostDetailsError &&
+          {inputPostDetailsError && (
             <Text color="red">{inputPostDetailsError}</Text>
-          }
+          )}
 
           {actionName === "編集" && (
             <Button
