@@ -7,10 +7,9 @@ import { useMessage } from "./useMessage";
 import { PostType } from "../types/api/post";
 import { useLocalStrage } from "./useLocalStrage";
 
-
 export const usePostDelete = () => {
   const { showMessage } = useMessage();
-  const { loginUserData} = useLocalStrage();
+  const { loginUserData } = useLocalStrage();
   const { posts, setPosts } = useContext(PostContext);
 
   const deletePost = useCallback((postId: number) => {

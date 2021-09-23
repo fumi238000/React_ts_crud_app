@@ -7,7 +7,6 @@ import { useMessage } from "./useMessage";
 import { PostContext } from "../providers/PostProvider";
 import { useLocalStrage } from "./useLocalStrage";
 
-
 export const usePostCreate = () => {
   const history = useHistory();
   const { showMessage } = useMessage();

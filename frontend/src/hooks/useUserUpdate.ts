@@ -15,7 +15,7 @@ export const useUserUpdate = () => {
     useContext(LoginUserContext);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const { loginUserData} = useLocalStrage();
+  const { loginUserData } = useLocalStrage();
 
   const userUpdate = useCallback((name: string, email: string) => {
     setLoading(true);

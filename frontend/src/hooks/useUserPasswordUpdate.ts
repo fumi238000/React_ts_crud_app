@@ -14,7 +14,7 @@ export const useUserPasswordUpdate = () => {
   const { loginUser, setLoginUser, setUserLoginStatus } =
     useContext(LoginUserContext);
   const [loading, setLoading] = useState(false);
-  const { loginUserData} = useLocalStrage();
+  const { loginUserData } = useLocalStrage();
 
   const userPasswordUpdate = useCallback((password: string) => {
     setLoading(true);
