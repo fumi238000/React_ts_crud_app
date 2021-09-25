@@ -3,9 +3,24 @@
   "version": "1.0.0",
   "description": "- TODOリストを作成し、React + TypeScript + RailsAPIを学習する",
   "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
     "build": "cd front && npm install && npm run build && cd ..",
     "deploy": "cp -a front/build/. public/",
     "heroku-postbuild": "npm run build && npm run deploy && echo 'Client built!'",
-  }
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fumi238000/react_ts_crud_app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fumi238000/react_ts_crud_app/issues"
+  },
+  "homepage": "https://github.com/fumi238000/react_ts_crud_app#readme"
 }
