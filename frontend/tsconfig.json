@@ -19,7 +19,10 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+<<<<<<< HEAD
     //TODO: anyの対応後削除する
+=======
+>>>>>>> 501473f99b1b5e5a2fbb18459a0cd7db74da3ad1
     "noImplicitAny": false,
   },
   "include": [
