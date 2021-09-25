@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   createContext,
   Dispatch,
@@ -13,6 +14,7 @@ type PostsContextType = {
 };
 
 //暫定
+
 export const PostContext = createContext<any>([]);
 //TODO: なぜ、以下のようのに定義できないのか明らかにすること
 // export const PostContext = createContext<Array<PostsContextType>>([]);

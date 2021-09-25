@@ -21,6 +21,7 @@ import { usePostUpdate } from "../../hooks/usePostUpdate";
 import { usePostValidate } from "../../hooks/usePostValidate";
 
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   postId?: any;
   postTitle: string;
   postDetails: string;

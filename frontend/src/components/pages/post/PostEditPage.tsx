@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { memo } from "react";
 import { PostForm } from "../../molecules/PostForm";
 import { GoBackButton } from "../../atms/button/GoBackButton";
