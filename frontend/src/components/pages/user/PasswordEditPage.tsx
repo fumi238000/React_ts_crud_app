@@ -14,6 +14,7 @@ import { useUserValidate } from "../../../hooks/useUserValidate";
 import { GoBackButton } from "../../atms/button/GoBackButton";
 
 export const PasswordEditPage: VFC = memo(() => {
+  const [inputNowUserPassword, setInputNowUserPassword] = useState<string>("");
   const [inputUserPassword, setInputUserPassword] = useState<string>("");
   const [inputConformPassword, setInputConformPassword] = useState<string>("");
 
@@ -23,6 +24,11 @@ export const PasswordEditPage: VFC = memo(() => {
     validateEditUserPassword,
     validateEditConformPassword,
   } = useUserValidate();
+
+  const onChangeInputNowUserPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    const nowPassword = e.target.value;
+    setInputNowUserPassword(nowPassword);
+  };
 
   const onChangeInputUserPassword = (e: ChangeEvent<HTMLInputElement>) => {
     const password = e.target.value;
@@ -40,7 +46,11 @@ export const PasswordEditPage: VFC = memo(() => {
 
   //更新ボタン
   const onClickPasswordUpdate = () => {
-    userPasswordUpdate(inputUserPassword);
+    userPasswordUpdate(
+      inputUserPassword,
+      inputConformPassword,
+      inputNowUserPassword
+    );
   };
 
   return (
@@ -53,6 +63,14 @@ export const PasswordEditPage: VFC = memo(() => {
           </Heading>
           <Divider my={4}></Divider>
           <Stack spacing={4} py={4} px={6}>
+            <p>現在のパスワード</p>
+            <Input
+              placeholder="現在のパスワード"
+              type="password"
+              value={inputNowUserPassword}
+              onChange={onChangeInputNowUserPassword}
+            />
+
             <p>新しいパスワード</p>
             <Input
               placeholder="パスワード"
@@ -66,7 +84,7 @@ export const PasswordEditPage: VFC = memo(() => {
 
             <p>新しいパスワード(確認用)</p>
             <Input
-              placeholder="パスワード"
+              placeholder="パスワード(確認用)"
               type="password"
               value={inputConformPassword}
               onChange={onChangeInputConformPassword}
@@ -81,7 +99,7 @@ export const PasswordEditPage: VFC = memo(() => {
               onClick={onClickPasswordUpdate}
               isLoading={loading}
               isDisabled={
-                !!inputUserPasswordError || !!inputConformPasswordError
+                !!inputUserPasswordError || !!inputConformPasswordError || !inputNowUserPassword
               }
             >
               更新する
