@@ -2,7 +2,7 @@
   "name": "project",
   "version": "1.0.0",
   "description": "You can post articles using this application.",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "build": "cd frontend && npm install && npm run build && cd ..",
     "deploy": "cp -a frontend/build/. public/",

@@ -17,4 +17,4 @@ production:
   <<: *default
   database: react_ts_crud_app_production
   username: react_ts_crud_app
-  password: <%= ENV['REACT_TS_CRUD_APP_DATABASE_PASSWORD'] %>
+  password: <%= ENV['PROJECT_DATABASE_PASSWORD'] %>

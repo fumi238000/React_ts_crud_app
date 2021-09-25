@@ -18,12 +18,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    //TODO: anyの対応後削除する
+    "noImplicitAny": false,
   },
   "include": [
     "src"
-  ],
-  "noImplicitAny": false,
+  ]
+
 }
 
 
