@@ -3,7 +3,6 @@ import theme from "./theme/theme";
 
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./router/Router";
-import "./App.css";
 import { HeaderLayout } from "./components/templates/HeaderLayout";
 import { LoginUserProvider } from "./providers/LoginUserProvider";
 import { PostProvider } from "./providers/PostProvider";
