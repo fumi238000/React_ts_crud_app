@@ -23,7 +23,7 @@ export const useUserPasswordUpdate = () => {
       axios
         .put(UserPwUPdateUrl, {
           password: password,
-          password_confirmation: password,
+          password_confirmation: password_confirmation,
           now_password: now_password,
           uid: loginUser?.uid,
           "access-token": loginUser?.accessToken,
@@ -52,10 +52,6 @@ export const useUserPasswordUpdate = () => {
             title: `${error.response.data.messages}`,
             status: "error",
           });
-          // showMessage({
-          //   title: "ユーザーパスワードの更新に失敗しました。",
-          //   status: "error",
-          // });
         });
     },
     []
