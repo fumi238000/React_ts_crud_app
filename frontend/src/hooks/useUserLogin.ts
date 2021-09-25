@@ -34,6 +34,7 @@ export const useUserLogIn = () => {
         //LocalStrage
         const LoginUser = JSON.stringify(data);
         localStorage.setItem("LoginUser", LoginUser);
+        //TODO: useLocalStrageに置き換える
         const localStrageData = localStorage.getItem("LoginUser") as string;
         const loginUserData: LocalStrageUserType = JSON.parse(localStrageData);
 

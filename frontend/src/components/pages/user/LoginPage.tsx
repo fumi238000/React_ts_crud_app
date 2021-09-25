@@ -1,18 +1,42 @@
 import { useState, ChangeEvent, memo, VFC } from "react";
-import { Box, Flex, Heading, Divider, Input, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Divider,
+  Input,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 
 import { useUserLogIn } from "../../../hooks/useUserLogin";
 import { Link } from "react-router-dom";
-import { BlueButton } from "../../atms/button/LoginButton";
+import { LoginButton } from "../../atms/button/LoginButton";
+import { useUserValidate } from "../../../hooks/useUserValidate";
 
 export const LoginPage: VFC = memo(() => {
   const [inputEmail, setinputEmail] = useState<string>("");
   const [inputPassword, setinputPassword] = useState<string>("");
-  const onChangeInputEmail = (e: ChangeEvent<HTMLInputElement>) =>
-    setinputEmail(e.target.value);
-  const onChangeInputUserPassword = (e: ChangeEvent<HTMLInputElement>) =>
-    setinputPassword(e.target.value);
+
+  const onChangeInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    const email = e.target.value;
+    setinputEmail(email);
+    validateUserEmail(email);
+  };
+
+  const onChangeInputUserPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    const password = e.target.value;
+    setinputPassword(password);
+    validateUserPassword(password);
+  };
+
   const { logIn, loading } = useUserLogIn();
+  const {
+    validateUserEmail,
+    inputEmailError,
+    validateUserPassword,
+    inputPasswordError,
+  } = useUserValidate();
 
   const onClickLogin = () => {
     logIn(inputEmail, inputPassword);
@@ -33,6 +57,8 @@ export const LoginPage: VFC = memo(() => {
             value={inputEmail}
             onChange={onChangeInputEmail}
           />
+          {inputEmailError && <Text color="red">{inputEmailError}</Text>}
+
           <p>パスワード</p>
           <Input
             placeholder="パスワード"
@@ -40,14 +66,16 @@ export const LoginPage: VFC = memo(() => {
             value={inputPassword}
             onChange={onChangeInputUserPassword}
           />
-          <BlueButton
+          {inputPasswordError && <Text color="red">{inputPasswordError}</Text>}
+
+          <LoginButton
             onClick={onClickLogin}
             loading={loading}
-            inputEmail={inputEmail}
-            inputPassword={inputPassword}
+            inputEmailError={inputEmailError}
+            inputPasswordError={inputPasswordError}
           >
             ログイン
-          </BlueButton>
+          </LoginButton>
           <Box pt={4} align="center">
             <Link to="/signup">新規作成する</Link>
           </Box>

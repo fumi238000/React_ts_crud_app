@@ -14,9 +14,11 @@ import {
   Heading,
   Input,
   Stack,
+  Text,
 } from "@chakra-ui/react";
 import { usePostCreate } from "../../hooks/usePostCreate";
 import { usePostUpdate } from "../../hooks/usePostUpdate";
+import { usePostValidate } from "../../hooks/usePostValidate";
 
 type Props = {
   postId?: any;
@@ -29,19 +31,30 @@ type Props = {
 export const PostForm: VFC<Props> = memo((props) => {
   const { postId, postTitle, postDetails, actionName, actionButtonName } =
     props;
-  const [inputPostTitle, setInputPostTitle] = useState("");
-  const [inputPostDetails, setInputPostDetails] = useState("");
-  const onChangeInputPostTitle = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => setInputPostTitle(e.target.value),
-    []
-  );
-  const onChangeInputPostDetails = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => setInputPostDetails(e.target.value),
-    []
-  );
 
+  const {
+    validatePostTitle,
+    inputPostTitleError,
+    validatePostDetails,
+    inputPostDetailsError,
+  } = usePostValidate();
   const { createPost, createLoading } = usePostCreate();
   const { updatePost, updateLoading } = usePostUpdate();
+
+  const [inputPostTitle, setInputPostTitle] = useState<string>("");
+  const [inputPostDetails, setInputPostDetails] = useState<string>("");
+
+  const onChangeInputPostTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    const title = e.target.value;
+    setInputPostTitle(title);
+    validatePostTitle(title);
+  };
+
+  const onChangeInputPostDetails = (e: ChangeEvent<HTMLInputElement>) => {
+    const details = e.target.value;
+    setInputPostDetails(details);
+    validatePostDetails(details);
+  };
 
   useEffect(() => {
     setInputPostTitle(postTitle);
@@ -70,6 +83,11 @@ export const PostForm: VFC<Props> = memo((props) => {
             value={inputPostTitle}
             onChange={onChangeInputPostTitle}
           />
+
+          {inputPostTitleError && (
+            <Text color="red">{inputPostTitleError}</Text>
+          )}
+
           <p>詳細</p>
           <Input
             placeholder="詳細"
@@ -77,13 +95,17 @@ export const PostForm: VFC<Props> = memo((props) => {
             onChange={onChangeInputPostDetails}
           />
 
+          {inputPostDetailsError && (
+            <Text color="red">{inputPostDetailsError}</Text>
+          )}
+
           {actionName === "編集" && (
             <Button
               bg="blue.500"
               color="white"
               onClick={onClickUpdatePost}
               isLoading={updateLoading}
-              isDisabled={inputPostTitle === "" || inputPostDetails === ""}
+              isDisabled={!!inputPostTitleError || !!inputPostDetailsError}
             >
               {actionButtonName}
             </Button>
@@ -95,7 +117,7 @@ export const PostForm: VFC<Props> = memo((props) => {
               color="white"
               onClick={onClickCreatePost}
               isLoading={createLoading}
-              isDisabled={inputPostTitle === "" || inputPostDetails === ""}
+              isDisabled={!!inputPostTitleError || !!inputPostDetailsError}
             >
               {actionButtonName}
             </Button>
