@@ -16,42 +16,49 @@ export const useUserPasswordUpdate = () => {
   const [loading, setLoading] = useState(false);
   const { loginUserData } = useLocalStrage();
 
-  const userPasswordUpdate = useCallback((password: string) => {
-    setLoading(true);
+  const userPasswordUpdate = useCallback(
+    (password: string, password_confirmation: string, now_password: string) => {
+      setLoading(true);
 
-    axios
-      .put(UserPwUPdateUrl, {
-        password: password,
-        password_confirmation: password,
-        uid: loginUser?.uid,
-        "access-token": loginUser?.accessToken,
-        client: loginUser?.client,
-      })
-      .then((res) => {
-        setLoginUser({
-          userId: loginUserData[`user_id`],
-          name: loginUserData[`name`],
-          email: loginUserData[`email`],
-          accessToken: loginUserData[`access-token`],
-          client: loginUserData[`client`],
-          uid: loginUserData[`uid`],
+      axios
+        .put(UserPwUPdateUrl, {
+          password: password,
+          password_confirmation: password,
+          now_password: now_password,
+          uid: loginUser?.uid,
+          "access-token": loginUser?.accessToken,
+          client: loginUser?.client,
+        })
+        .then((res) => {
+          setLoginUser({
+            userId: loginUserData[`user_id`],
+            name: loginUserData[`name`],
+            email: loginUserData[`email`],
+            accessToken: loginUserData[`access-token`],
+            client: loginUserData[`client`],
+            uid: loginUserData[`uid`],
+          });
+          showMessage({
+            title: "ユーザーのパスワードを更新しました",
+            status: "success",
+          });
+          setUserLoginStatus(true);
+          setLoading(false);
+          history.push("/mypage");
+        })
+        .catch((error) => {
+          setLoading(false);
+          showMessage({
+            title: `${error.response.data.messages}`,
+            status: "error",
+          });
+          // showMessage({
+          //   title: "ユーザーパスワードの更新に失敗しました。",
+          //   status: "error",
+          // });
         });
-        showMessage({
-          title: "ユーザーのパスワードを更新しました",
-          status: "success",
-        });
-        setUserLoginStatus(true);
-        setLoading(false);
-        history.push("/mypage");
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-        showMessage({
-          title: "ユーザーパスワードの更新に失敗しました。",
-          status: "error",
-        });
-      });
-  }, []);
+    },
+    []
+  );
   return { userPasswordUpdate, loading };
 };
