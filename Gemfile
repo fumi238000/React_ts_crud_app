@@ -5,7 +5,7 @@ ruby "2.6.6"
 
 gem "active_model_serializers"
 gem "bootsnap", ">= 1.4.4", require: false
-gem "devise"
+gem "devise", "4.7.3"
 gem "devise_token_auth"
 gem "dotenv-rails"
 gem "foreman"
