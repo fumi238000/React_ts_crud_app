@@ -1,0 +1,11 @@
+{
+  "name": "react_ts_crud_app",
+  "version": "1.0.0",
+  "description": "- TODOリストを作成し、React + TypeScript + RailsAPIを学習する",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd front && npm install && npm run build && cd ..",
+    "deploy": "cp -a front/build/. public/",
+    "heroku-postbuild": "npm run build && npm run deploy && echo 'Client built!'",
+  }
+}
