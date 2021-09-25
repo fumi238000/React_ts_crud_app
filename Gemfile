@@ -8,6 +8,7 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "devise"
 gem "devise_token_auth"
 gem "dotenv-rails"
+gem "foreman"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "rack-cors"
