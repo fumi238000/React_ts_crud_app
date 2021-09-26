@@ -51,3 +51,5 @@ Metrics/AbcSize:
 # クラスのネストを許可
 ClassAndModuleChildren:
   EnforcedStyle: compact
+  Exclude:
+    - "config/application.rb"

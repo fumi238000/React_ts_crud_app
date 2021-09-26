@@ -19,8 +19,10 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-class ReactTsCrudApp::Application < Rails::Application
-  config.load_defaults 6.1
-  config.i18n.default_locale = :ja
-  config.api_only = true
+module ReactTsCrudApp
+  class ::Application < Rails::Application
+    config.load_defaults 6.1
+    config.i18n.default_locale = :ja
+    config.api_only = true
+  end
 end
