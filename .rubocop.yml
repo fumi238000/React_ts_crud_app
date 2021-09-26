@@ -47,3 +47,7 @@ Metrics/BlockLength:
 
 Metrics/AbcSize:
   Max: 20
+
+# クラスのネストを許可
+ClassAndModuleChildren:
+  EnforcedStyle: compact
