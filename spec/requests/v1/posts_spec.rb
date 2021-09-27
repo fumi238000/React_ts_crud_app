@@ -54,10 +54,8 @@ RSpec.describe "V1::Posts", type: :request do
 
     context "パラメータが異常なとき" do
       let(:post_params) { { post: attributes_for(:post, :invalid) } }
-      xit "データが保存されないこと" do
-        # TODO: 正しい記述を確認する
-        # expect { subject }.not_to change { Post.count }.by(0)
-        subject
+      it "データが保存されないこと" do
+        expect { subject }.not_to change(Post, :count)
         expect(response).to have_http_status(:unprocessable_entity)
         json = JSON.parse(response.body)
         expect(json).to include "Titleを入力してください"
@@ -104,10 +102,10 @@ RSpec.describe "V1::Posts", type: :request do
 
     context "パラメータが異常なとき" do
       let(:post_params) { { post: attributes_for(:post, :invalid, user_id: current_user.id) } }
-      xit "投稿が更新されないこと" do
+      it "投稿が更新されないこと" do
         subject
-        # expect { subject }.not_to change { post.reload.title }
-        # expect { subject }.not_to change { post.reload.details }
+        expect { post.reload.title }.not_to change(post, :title)
+        expect { post.reload.details }.not_to change(post, :details)
         expect(response).to have_http_status(:unprocessable_entity)
         json = JSON.parse(response.body)
         expect(json).to include "Titleを入力してください"
