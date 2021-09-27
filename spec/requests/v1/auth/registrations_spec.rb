@@ -47,4 +47,33 @@ RSpec.describe "V1::Auth::Registrations", type: :request do
       end
     end
   end
+
+  # ユーザー更新
+  describe "PUT /v1/auth" do
+    subject { put(v1_user_registration_path, params: params, headers: headers) }
+
+    let(:current_user) { create(:user) }
+    let(:headers) { current_user.create_new_auth_token }
+
+    context "パラメータが正常な場合" do
+      let(:params) { attributes_for(:user_params) }
+      it "更新できる" do
+        new_user = params
+        expect { subject }.to change { current_user.reload.name }.from(current_user.name).to(new_user[:name])
+                                                                 .and change { current_user.reload.email }.from(current_user.email).to(new_user[:email])
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "パラメータが異常な場合" do
+      let(:params) { attributes_for(:user_params, :invalid_params) }
+      it "更新できない" do
+        subject
+        expect(response).to have_http_status(:unprocessable_entity)
+        # TODO: ワンライナーにしたい。
+        expect { current_user.reload }.not_to change(current_user, :name)
+        expect { current_user.reload }.not_to change(current_user, :email)
+      end
+    end
+  end
 end
