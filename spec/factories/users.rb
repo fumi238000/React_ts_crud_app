@@ -20,4 +20,14 @@ FactoryBot.define do
       email { nil }
     end
   end
+
+  factory :password_params, class: :user do
+    password { Faker::Internet.password(min_length: 8) }
+    password_confirmation { password }
+
+    trait :invalid_params do
+      password { nil }
+      conform_password { nil }
+    end
+  end
 end
