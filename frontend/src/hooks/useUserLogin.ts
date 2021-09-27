@@ -54,7 +54,7 @@ export const useUserLogIn = () => {
       })
       .catch((error) => {
         console.log(error);
-        showMessage({ title: "ログインにできませんでした", status: "error" });
+        showMessage({ title: "ログインできませんでした", status: "error" });
         setLoading(false);
       });
   }, []);

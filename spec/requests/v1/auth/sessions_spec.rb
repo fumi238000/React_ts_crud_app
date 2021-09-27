@@ -4,7 +4,7 @@ RSpec.describe "V1::Auth::Sessions", type: :request do
   let(:current_user) { create(:user) }
   let(:headers) { current_user.create_new_auth_token }
 
-  # サインイン
+  # サインイン(ログイン）
   describe "POST /v1/auth/sign_in" do
     subject { post(v1_user_session_path, params: params) }
     before { @user = create(:user) }

@@ -20,7 +20,7 @@ require "action_cable/engine"
 Bundler.require(*Rails.groups)
 
 module ReactTsCrudApp
-  class Application < Rails::Application
+  class ::Application < Rails::Application
     config.load_defaults 6.1
     config.i18n.default_locale = :ja
     config.api_only = true
