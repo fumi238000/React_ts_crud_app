@@ -23,9 +23,6 @@ export const usePostIndex = () => {
       .then((res) => {
         setPosts(res.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
   }, []);
   return { getPosts, posts };
 };

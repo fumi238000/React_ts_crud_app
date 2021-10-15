@@ -25,13 +25,11 @@ export const usePostUpdate = () => {
           uid: loginUserData[`uid`],
         })
         .then((res) => {
-          console.log(res);
           showMessage({ title: "投稿を更新しました", status: "success" });
           setupdateLoading(false);
           history.push("/posts");
         })
         .catch((error) => {
-          console.log(error);
           setupdateLoading(false);
           showMessage({ title: `${error.response.data}`, status: "error" });
         });

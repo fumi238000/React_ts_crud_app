@@ -25,7 +25,6 @@ export const useUserDelete = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         setLoginUser(null);
         showMessage({ title: "ユーザーを削除しました", status: "error" });
         setLoading(false);
@@ -33,7 +32,6 @@ export const useUserDelete = () => {
         history.push("/login");
       })
       .catch((error) => {
-        console.log(error);
         showMessage({ title: "削除できませんでした", status: "error" });
         setLoading(false);
       });

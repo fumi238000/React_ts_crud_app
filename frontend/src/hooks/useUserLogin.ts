@@ -53,7 +53,6 @@ export const useUserLogIn = () => {
         history.push("/posts");
       })
       .catch((error) => {
-        console.log(error);
         showMessage({ title: "ログインできませんでした", status: "error" });
         setLoading(false);
       });

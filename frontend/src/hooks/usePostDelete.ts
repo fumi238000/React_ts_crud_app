@@ -22,7 +22,6 @@ export const usePostDelete = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         //TODO: 2回目以降がうまくいかないので、修正すること
         setPosts(
           posts.filter((post: PostType) => {
@@ -32,7 +31,6 @@ export const usePostDelete = () => {
         showMessage({ title: "投稿を削除しました", status: "error" });
       })
       .catch((error) => {
-        console.log(error);
         showMessage({ title: "投稿を削除できませんでした", status: "success" });
       });
   }, []);

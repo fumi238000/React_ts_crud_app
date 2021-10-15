@@ -29,7 +29,6 @@ export const useUserLogOut = () => {
         history.push("/login");
       })
       .catch((error) => {
-        console.log(error);
         showMessage({ title: "ログアウトできませんでした", status: "error" });
       });
   }, []);
