@@ -14,5 +14,15 @@ export const useLocalStrage = () => {
       "access-token": userData["access-token"],
     };
     return { loginUserData };
+  } else {
+    const loginUserData = {
+      user_id: 0,
+      name: "なし",
+      email: "test@gmail.com",
+      uid: "なし",
+      client: "なし",
+      "access-token": "なし",
+    };
+    return { loginUserData };
   }
 };
