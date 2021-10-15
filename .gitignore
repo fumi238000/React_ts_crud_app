@@ -31,3 +31,4 @@ frontend/build
 
 /public
 /vendor/bundle
+/frontend/coverage/
