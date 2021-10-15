@@ -99,7 +99,9 @@ export const PasswordEditPage: VFC = memo(() => {
               onClick={onClickPasswordUpdate}
               isLoading={loading}
               isDisabled={
-                !!inputUserPasswordError || !!inputConformPasswordError || !inputNowUserPassword
+                !!inputUserPasswordError ||
+                !!inputConformPasswordError ||
+                !inputNowUserPassword
               }
             >
               更新する

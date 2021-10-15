@@ -59,7 +59,6 @@ export const useUserUpdate = () => {
         history.push("/mypage");
       })
       .catch((error) => {
-        console.log(error);
         setLoading(false);
         showMessage({
           title: "ユーザー情報の更新に失敗しました",

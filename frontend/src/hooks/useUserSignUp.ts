@@ -57,7 +57,6 @@ export const useUserSignUp = () => {
         history.push("/posts");
       })
       .catch((error) => {
-        console.log(error);
         setLoading(false);
         showMessage({ title: "作成に失敗しました。", status: "error" });
       });

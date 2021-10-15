@@ -25,14 +25,12 @@ export const usePostCreate = () => {
         uid: loginUserData[`uid`],
       })
       .then((res) => {
-        console.log(res);
         setCreateLoading(false);
         setPosts([...posts, res.data]);
         showMessage({ title: "投稿を作成しました", status: "success" });
         history.push("/posts");
       })
       .catch((error) => {
-        console.log(error);
         setCreateLoading(false);
         showMessage({ title: `${error.response.data}`, status: "error" });
       });
